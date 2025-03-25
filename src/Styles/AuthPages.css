@@ -1,0 +1,122 @@
+.auth-container {
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  gap: 20px; 
+  padding-right: 250px; 
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 1rem;
+}
+
+.login-image {
+  width: 60%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.form-section {
+  flex: 1;
+  padding: 2rem;
+  text-align: left;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 350px;
+}
+
+.login-title {
+  color: #4CAF50;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.login-description {
+  color: #777;
+  margin-bottom: 1.5rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.auth-button:hover {
+  background-color: #45A049;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: 0.5rem;
+  color: #4CAF50;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.link {
+  color: #4CAF50;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: #45A049;
+}
+
+.social-login {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.social-icon.google {
+  background-image: url('/./src/assets/GoogleIcon.webp');
+  background-size: cover;
+}
+
+.social-icon.facebook {
+  background-image: url('/./src/assets/faceboolIcon.webp');
+  background-size: cover;
+}
+
+.social-icon.apple {
+  background-image: url('/./src/assets/AppleIcon.png');
+  background-size: cover;
+}
