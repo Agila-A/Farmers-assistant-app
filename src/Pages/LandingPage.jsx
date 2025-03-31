@@ -18,12 +18,6 @@ const LandingPage = () => {
       {/* Header Section */}
       <header className="navbar">
         <h1>Farmer's Assistant</h1>
-        <nav>
-          <a href="/">Home</a>
-          <a href="/schedule">Schedule</a>
-          <a href="/forum">Forum</a>
-          <a href="/chatbot">Chatbot</a>
-        </nav>
         <div className="auth-buttons">
         <button className="login" onClick={handleLogin}>Login</button>
           <button className="signup" onClick={handleGetStarted}>Sign up</button>
