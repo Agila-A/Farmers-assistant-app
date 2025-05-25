@@ -7,7 +7,6 @@ import cropIcon from '../assets/crop-icon.png.jpeg';
 import advisoryIcon from '../assets/advisory-icon.png.jpeg';
 import forumIcon from '../assets/forum-icon.png.png';
 import footerImage from '../assets/image.png';
-import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -32,15 +31,6 @@ const LandingPage = () => {
           <Link to="/chatbot">Chatbot</Link>
           <Link to="/budget">Budget</Link>
           <Link to="/community">Community</Link>
-        <nav>
-  <Link to="/">Home</Link>
-  <Link to="/schedule">Schedule</Link>
-  <Link to="/agrilend">AgriLend</Link>
-  <Link to="/chatbot">Chatbot</Link>
-  <Link to="/budget">Budget</Link>
-  <Link to="/community">Community</Link>
-</nav>
-
         </nav>
         <div className="auth-buttons">
           <button className="login" onClick={handleLogin}>Login</button>
