@@ -1,22 +1,14 @@
-import React, { useState } from 'react';
-import "../Styles/Calendar.css";
+// src/components/Calendar.jsx
+import React from 'react';
+import '../styles/Calendar.css';
 
-const Calendar = () => {
-  const [events, setEvents] = useState([]);
-  const [newEvent, setNewEvent] = useState({ date: '', task: '' });
-
-  const handleAddEvent = () => {
-    if (newEvent.date && newEvent.task) {
-      setEvents([...events, newEvent]);
-      setNewEvent({ date: '', task: '' });
-    }
-  };
-
-  const handleDeleteEvent = (index) => {
-    const updatedEvents = events.filter((_, i) => i !== index);
-    setEvents(updatedEvents);
-  };
-
+const Calendar = ({
+  events,
+  newEvent,
+  setNewEvent,
+  handleAddEvent,
+  handleDeleteEvent,
+}) => {
   return (
     <div className="calendar-container">
       {/* Banner Section */}
@@ -32,7 +24,8 @@ const Calendar = () => {
           <h3>March</h3>
           <div className="calendar">
             <div className="week">
-              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+              <span>Mon</span><span>Tue</span><span>Wed</span>
+              <span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
             </div>
             <div className="days">
               <button>24</button>

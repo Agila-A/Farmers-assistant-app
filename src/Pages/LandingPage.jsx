@@ -1,6 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import "../Styles/LandingPage.css";
+
+import weatherIcon from '../assets/weather-icon.png.jpeg';
+import cropIcon from '../assets/crop-icon.png.jpeg';
+import advisoryIcon from '../assets/advisory-icon.png.jpeg';
+import forumIcon from '../assets/forum-icon.png.png';
+import footerImage from '../assets/image.png';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -18,8 +24,16 @@ const LandingPage = () => {
       {/* Header Section */}
       <header className="navbar">
         <h1>Farmer's Assistant</h1>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/schedule">Schedule</Link>
+          <Link to="/agrilend">AgriLend</Link>
+          <Link to="/chatbot">Chatbot</Link>
+          <Link to="/budget">Budget</Link>
+          <Link to="/community">Community</Link>
+        </nav>
         <div className="auth-buttons">
-        <button className="login" onClick={handleLogin}>Login</button>
+          <button className="login" onClick={handleLogin}>Login</button>
           <button className="signup" onClick={handleGetStarted}>Sign up</button>
         </div>
       </header>
@@ -40,19 +54,19 @@ const LandingPage = () => {
         <p>We provide an intelligent approach to improve traditional farming practices through technology.</p>
         <div className="service-cards">
           <div className="service-card">
-            <img src=".\src\assets\weather-icon.png.jpeg" alt="Weather Forecast" />
+            <img src={weatherIcon} alt="Weather Forecast System Icon" />
             <h4>Weather Forecast System</h4>
           </div>
           <div className="service-card">
-            <img src=".\src\assets\crop-icon.png.jpeg" alt="Crop Scheduling" />
-            <h4>Crop management Scheduling</h4>
+            <img src={cropIcon} alt="Crop Scheduling Icon" />
+            <h4>Crop Management Scheduling</h4>
           </div>
           <div className="service-card">
-            <img src=".\src\assets\advisory-icon.png.jpeg" alt="Farming Advisory" />
+            <img src={advisoryIcon} alt="Farming Advisory Icon" />
             <h4>Farming Advisory Chatbot</h4>
           </div>
           <div className="service-card">
-            <img src=".\src\assets\forum-icon.png.png" alt="Community Forum" />
+            <img src={forumIcon} alt="Community Forum Icon" />
             <h4>Community Forum</h4>
           </div>
         </div>
@@ -67,7 +81,7 @@ const LandingPage = () => {
       {/* Footer Section */}
       <footer>
         <h2>Our Passion for Agriculture Nurturing Growth and Sustaining the Future</h2>
-        <img src="./src/assets/image.png" alt="Farming Image" className="footer-image"/>
+        <img src={footerImage} alt="Sustainable Farming Visual" className="footer-image" />
         <div className="footer-signature">Farmer's Assistant App</div>
       </footer>
     </div>
