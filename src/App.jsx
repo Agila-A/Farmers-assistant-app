@@ -1,39 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CalendarPage from './Pages/CalendarPage';  // Assuming CalendarPage holds Calendar
-import LandingPage from './Pages/LandingPage';
-import SignUpPage from './Pages/SignUpPage';  // Import SignUpPage
-import LoginPage from './Pages/LoginPage';    // Import LoginPage
 
+import CalendarPage from './Pages/CalendarPage';
+import LandingPage from './Pages/LandingPage';
+import SignUpPage from './Pages/SignUpPage';
+import LoginPage from './Pages/LoginPage';
 import AgriLendPage from './Pages/AgriLendPage';
 
-
-
+import Layout from './Components/Layout';
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Default page as LandingPage */}
-        <Route path="/" element={<LandingPage />} /> 
+        {/* Pages without sidebar */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
 
-        {/* Calendar Page */}
-        <Route path="/schedule" element={<CalendarPage />} /> 
-
-        {/* Sign up page */}
-        <Route path="/signup" element={<SignUpPage />} /> 
-
-        {/* Login page */}
-        <Route path="/login" element={<LoginPage />} /> 
-
-        {/* AgriLend Page */}
-
-        <Route path="/agrilend" element={<AgriLendPage />} />
-
+        {/* Pages with sidebar */}
+        <Route path="/agrilend" element={<Layout><AgriLendPage /></Layout>} />
+        <Route path="/schedule" element={<Layout><CalendarPage /></Layout>} />
+        {/* Add more as needed like dashboard, budget, etc */}
       </Routes>
     </Router>
   );
 };
 
 export default App;
-
