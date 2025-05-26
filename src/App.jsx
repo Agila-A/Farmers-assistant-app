@@ -5,6 +5,11 @@ import LandingPage from './Pages/LandingPage';
 import SignUpPage from './Pages/SignUpPage';  // Import SignUpPage
 import LoginPage from './Pages/LoginPage';    // Import LoginPage
 
+import AgriLendPage from './Pages/AgriLendPage';
+
+
+
+
 const App = () => {
   return (
     <Router>
@@ -20,6 +25,11 @@ const App = () => {
 
         {/* Login page */}
         <Route path="/login" element={<LoginPage />} /> 
+
+        {/* AgriLend Page */}
+
+        <Route path="/agrilend" element={<AgriLendPage />} />
+
       </Routes>
     </Router>
   );

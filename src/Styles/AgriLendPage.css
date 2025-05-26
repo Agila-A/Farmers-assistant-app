@@ -1,0 +1,73 @@
+.agrilend-page {
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.agrilend-title {
+  text-align: center;
+  color: green;
+}
+
+.rent-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f4f4f4;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.rent-btn {
+  background-color: orange;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 0.6rem;
+  margin: 1rem 0;
+}
+
+.equipment-list {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.equipment-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 200px;
+  cursor: pointer;
+  position: relative;
+}
+
+.tag {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: orange;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.equipment-detail img {
+  width: 100%;
+  max-width: 500px;
+}
+
+.request-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
