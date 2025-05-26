@@ -19,23 +19,6 @@ const AgriLendPage = () => {
 
   return (
     <div className="agrilend-container">
-      {/* Sidebar */}
-      <div className="sidebar">
-        <h3>Farmer’s Assistant</h3>
-        <ul>
-          <li><span>🏠</span> Home</li>
-          <li><span>📊</span> Dashboard</li>
-          <li className="active"><span>🚜</span> AgriLend</li>
-          <li><span>💰</span> Budget Tracker</li>
-          <li><span>💬</span> Let’s Chat</li>
-          <li><span>📅</span> Schedules</li>
-        </ul>
-        <div className="sidebar-footer">
-          <li><span>⚙️</span> Settings</li>
-          <li><span>🚪</span> Logout</li>
-        </div>
-      </div>
-
       {/* Main content */}
       <div className="agrilend-main">
         {/* Header */}
