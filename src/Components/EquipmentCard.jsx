@@ -1,13 +1,17 @@
 // src/components/AgriLend/EquipmentCard.jsx
-import React from 'react';
-import '../Styles/AgriLendPage.css';
+import React from "react";
+import "../styles/AgriLendPage.css";
 
-export const EquipmentCard = ({ equipment, onClick }) => (
-  <div className="equipment-card" onClick={onClick}>
-    <img src={equipment.image} alt={equipment.name} width="100%" />
-    <h4>{equipment.name}</h4>
-    <p>₹ {equipment.price}</p>
-    <p>Owner: {equipment.owner}</p>
-    {equipment.tag && <span className="tag">{equipment.tag}</span>}
-  </div>
-);
+const EquipmentCard = ({ equipment }) => {
+  return (
+    <div className="equipment-card">
+      <img src={equipment.image} alt={equipment.name} />
+      <h3>{equipment.name}</h3>
+      <p className="price">{equipment.price}</p>
+      <p className="owner">Owner name: {equipment.owner}</p>
+      {equipment.isOnSale && <span className="sale-tag">Sale</span>}
+    </div>
+  );
+};
+
+export default EquipmentCard;
