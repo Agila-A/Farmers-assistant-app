@@ -1,7 +1,6 @@
-// src/Pages/AgriLend/AgriLend.jsx
 import React, { useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
-import EquipmentCard from '../Components/EquipmentCard'; 
+import EquipmentCard from '../components/EquipmentCard';
 import { EquipmentDetail } from '../Components/EquipmentDetail';
 import RequestConfirmation from '../Components/RequestConfirmation';
 import "../styles/AgriLendPage.css";
@@ -12,7 +11,7 @@ import conveyorImage from '../assets/conveyor.png';
 
 const dummyData = [
   { id: 1, name: "Tractor with tipper", price: "₹ 2500", owner: "Raj", image: tractorImage },
-  { id: 2, name: "Organic manure", price: "₹ 1500", owner: "Raj Kumar", image: manureImage, isOnSale: true },
+  { id: 2, name: "Organic manure", price: "₹ 1500", owner: "Raj Kumar", image: manureImage },
   { id: 3, name: "Iron gravity Conveyor", price: "₹ 3000", owner: "Suresh", image: conveyorImage },
 ];
 
@@ -29,16 +28,11 @@ const AgriLendPage = () => {
     setSelectedEquipment(null);
   };
 
-  const handleDone = () => {
-    setShowConfirmation(false);
-    setSelectedEquipment(null);
-  };
-
   return (
     <div className="agrilend-container">
       <div className="agrilend-main">
         <div className="agrilend-header">
-          <h1>🌿 AGRILEND</h1>
+          <h1>AGRILEND</h1>
           <p>Find Equipment Near You</p>
         </div>
 
@@ -51,10 +45,7 @@ const AgriLendPage = () => {
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
             >
-              <RequestConfirmation
-                isSale={selectedEquipment?.isOnSale || false}
-                onDone={handleDone}
-              />
+              <RequestConfirmation onBack={handleBack} />
             </motion.div>
           ) : selectedEquipment ? (
             <motion.div
