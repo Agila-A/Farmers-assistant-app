@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../styles/AgriLendForm.css";
 
-const AgrilendForm = ({ onBack }) => {
+const AgrilendForm = ({ onBack, onSubmit }) => {
   const [form, setForm] = useState({
     name: '', equipment: '', price: '', delivery: true, location: '', from: '', to: '', contact: '', agree: false, image: null,
   });
@@ -22,9 +22,7 @@ const AgrilendForm = ({ onBack }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Equipment listed successfully!');
-    console.log(form);
-    onBack();
+    onSubmit(form); // Pass form data up
   };
 
   return (
@@ -93,3 +91,4 @@ const AgrilendForm = ({ onBack }) => {
 };
 
 export default AgrilendForm;
+
