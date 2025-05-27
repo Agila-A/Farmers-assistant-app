@@ -1,3 +1,8 @@
+/* --- General Form Styles --- */
+body, html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
 .form-container {
   font-family: "Segoe UI", sans-serif;
   padding: 2rem;
@@ -142,27 +147,38 @@ form {
   display: inline-block;
 }
 
+/* --- Top Bar --- */
 .top-bar {
   background-color: #e6f4dc;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.75rem 1.5rem;
   border-bottom: 1px solid #ccc;
+  height: 64px;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  position: sticky;  /* <- Add this */
+}
+
+
+.greeting {
+  display: flex;
+  flex-direction: column;
 }
 
 .greeting h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.25rem;
   color: #2d7c2d;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .greeting p {
   margin: 0;
-  font-size: 1.2rem;
-  color: #2d7c2d;
-  font-weight: 500;
+  font-size: 0.95rem;
+  color: #4caf50;
 }
 
 .request-button-container {
@@ -173,8 +189,8 @@ form {
   background-color: #ff5722;
   color: white;
   border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
@@ -183,11 +199,101 @@ form {
 
 .notification-badge {
   position: absolute;
-  top: -8px;
-  right: -8px;
+  top: -6px;
+  right: -6px;
   background: red;
   color: white;
-  font-size: 0.7rem;
-  padding: 2px 6px;
+  font-size: 0.65rem;
+  padding: 2px 5px;
   border-radius: 50%;
+}
+
+/* --- Page Container --- */
+.agrilend-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+
+}
+
+/* --- Main Section --- */
+.agrilend-main {
+  width: 100%;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding-top: 80px;
+}
+
+/* --- Banner --- */
+.agrilend-banner {
+  background-color: #f1f8e9;
+  width: 100%;
+  max-width: 1000px;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.request-button-container {
+  position: relative;
+  margin-right: 1rem; /* 👈 Pushes it to the left */
+}
+
+/* --- Banner Icons --- */
+.agrilend-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rent-icon {
+  font-size: 1rem;
+  background: #c5e1a5;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.notify-icon {
+  font-size: 1.25rem;
+}
+
+/* --- Search Bar --- */
+.search-bar {
+  width: 100%;
+  max-width: 1000px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+/* --- Equipment Cards --- */
+.equipment-list {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.equipment-card {
+  flex: 1 1 280px; /* Adjust to suit your card size */
+  max-width: 300px;
+  box-sizing: border-box;
 }

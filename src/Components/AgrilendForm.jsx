@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../styles/AgriLendForm.css";
 
-const AgrilendForm = ({ onBack, onSubmit }) => {
+const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
   const [form, setForm] = useState({
     name: '', equipment: '', price: '', delivery: true, location: '', from: '', to: '', contact: '', agree: false, image: null,
   });
@@ -14,7 +14,7 @@ const AgrilendForm = ({ onBack, onSubmit }) => {
     else if (name === 'price' || name === 'contact') validatedValue = value.replace(/[^0-9]/g, '');
 
     if (type === 'checkbox') setForm(prev => ({ ...prev, [name]: checked }));
-    else if (type === 'file') setForm(prev => ({ ...prev, image: files[0] }));
+    else if (type === 'file') setForm(prev => ({ ...prev, image: files[0] })); 
     else setForm(prev => ({ ...prev, [name]: validatedValue }));
   };
 
@@ -22,7 +22,15 @@ const AgrilendForm = ({ onBack, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(form); // Pass form data up
+    const newEquipment = {
+      id: Date.now(),
+      name: form.equipment,
+      price: `₹ ${form.price}`,
+      owner: form.name,
+      image: form.image ? URL.createObjectURL(form.image) : null
+    };
+    onSubmitSuccess(newEquipment);
+    alert('Equipment listed successfully!');
   };
 
   return (
@@ -91,4 +99,6 @@ const AgrilendForm = ({ onBack, onSubmit }) => {
 };
 
 export default AgrilendForm;
+
+
 
