@@ -32,7 +32,7 @@ const AgriLendPage = () => {
     <div className="agrilend-container">
       <div className="agrilend-main">
         <div className="agrilend-header">
-          <h1>AGRILEND</h1>
+          <h1>🌿 AGRILEND</h1>
           <p>Find Equipment Near You</p>
         </div>
 
