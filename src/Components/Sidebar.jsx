@@ -16,6 +16,7 @@ const Sidebar = () => {
         <li onClick={() => navigate('/budget')}><span>💰</span> Budget Tracker</li>
         <li onClick={() => navigate('/chat')}><span>💬</span> Let’s Chat</li>
         <li onClick={() => navigate('/schedule')}><span>📅</span> Schedules</li>
+        <li onClick={() => navigate('/community')}><span>🚜</span> Community</li>
       </ul>
       <div className="sidebar-footer">
         <li onClick={() => navigate('/settings')}><span>⚙️</span> Settings</li>
