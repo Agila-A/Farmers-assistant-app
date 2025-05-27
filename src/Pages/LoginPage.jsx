@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import "../Styles/AuthPages.css"; // Ensure that you update the CSS for this
+import "../Styles/AuthPages.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -9,21 +9,28 @@ const LoginPage = () => {
     navigate("/signup");
   };
 
+  const handleLogin = () => {
+    // Placeholder for authentication logic
+    navigate("/Dashboard");
+  };
+
   return (
     <div className="auth-container">
       {/* Left section with image */}
       <div className="image-section">
-        <img src=".\src\assets\farmer.png" alt="Farmer" className="login-image" />
+        <img src="./src/assets/farmer.png" alt="Farmer" className="login-image" />
       </div>
 
       {/* Right section with login form */}
       <div className="form-section">
         <h2 className="login-title">Login</h2>
-        <p className="login-description">Welcome back! Log in back to access our exclusive and helpful contents</p>
-        <form>
+        <p className="login-description">Welcome back! Log in to access our exclusive and helpful contents</p>
+        <form onSubmit={(e) => e.preventDefault()}>
           <input type="email" placeholder="Your email" className="input-field" />
           <input type="password" placeholder="Password" className="input-field" />
-          <button type="submit" className="auth-button">Log In</button>
+          <button type="button" className="auth-button" onClick={handleLogin}>
+            Log In
+          </button>
         </form>
         <p className="forgot-password">Forget password?</p>
         <p>Don't have an account? <span className="link" onClick={handleSignUp}>Sign up</span></p>
