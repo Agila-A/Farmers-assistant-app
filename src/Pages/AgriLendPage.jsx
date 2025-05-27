@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import EquipmentCard from '../components/EquipmentCard';
 import { EquipmentDetail } from '../Components/EquipmentDetail';
+import AgrilendForm from '../components/AgrilendForm';
 import RequestConfirmation from '../Components/RequestConfirmation';
 import "../styles/AgriLendPage.css";
 
@@ -18,6 +19,7 @@ const dummyData = [
 const AgriLendPage = () => {
   const [selectedEquipment, setSelectedEquipment] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   const handleRequest = () => {
     setShowConfirmation(true);
@@ -26,15 +28,20 @@ const AgriLendPage = () => {
   const handleBack = () => {
     setShowConfirmation(false);
     setSelectedEquipment(null);
+    setShowForm(false);
   };
 
   return (
     <div className="agrilend-container">
       <div className="agrilend-main">
-        <div className="agrilend-header">
-          <h1>AGRILEND</h1>
-          <p>Find Equipment Near You</p>
-        </div>
+        
+      
+        {!showForm && (
+          <div className="agrilend-header">
+            <h1>AGRILEND</h1>
+            <p>Find Equipment Near You</p>
+          </div>
+        )}
 
         <AnimatePresence mode="wait">
           {showConfirmation ? (
@@ -46,6 +53,16 @@ const AgriLendPage = () => {
               transition={{ duration: 0.3 }}
             >
               <RequestConfirmation onBack={handleBack} />
+            </motion.div>
+          ) : showForm ? (
+            <motion.div
+              key="form"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <AgrilendForm onBack={handleBack} />
             </motion.div>
           ) : selectedEquipment ? (
             <motion.div
@@ -72,7 +89,7 @@ const AgriLendPage = () => {
               <div className="agrilend-banner">
                 <p>{'➡️ Click here to rent your farm items and equipments'}</p>
                 <div className="agrilend-icons">
-                  <button><span className="rent-icon">🛒 RENT</span></button>
+                  <button onClick={() => setShowForm(true)}><span className="rent-icon">🛒 RENT</span></button>
                   <span className="notify-icon">🔔</span>
                 </div>
               </div>
