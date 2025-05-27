@@ -6,6 +6,7 @@ import LandingPage from './Pages/LandingPage';
 import SignUpPage from './Pages/SignUpPage';
 import LoginPage from './Pages/LoginPage';
 import AgriLendPage from './Pages/AgriLendPage';
+import Dashboard from './Components/Dashboard'; // ✅ Add this
 
 import Layout from './Components/Layout';
 
@@ -19,9 +20,9 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
 
         {/* Pages with sidebar */}
+        <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} /> {/* ✅ Added */}
         <Route path="/agrilend" element={<Layout><AgriLendPage /></Layout>} />
         <Route path="/schedule" element={<Layout><CalendarPage /></Layout>} />
-        {/* Add more as needed like dashboard, budget, etc */}
       </Routes>
     </Router>
   );

@@ -9,23 +9,30 @@ const SignUpPage = () => {
     navigate("/login");
   };
 
+  const handleSignUp = () => {
+    // Placeholder for sign-up logic
+    navigate("/dashboard");
+  };
+
   return (
     <div className="auth-container">
       {/* Left section with image */}
       <div className="image-section">
-        <img src=".\src\assets\farmer.png" alt="Farmer" className="login-image" />
+        <img src="./src/assets/farmer.png" alt="Farmer" className="login-image" />
       </div>
 
       {/* Right section with sign-up form */}
       <div className="form-section">
         <h2 className="login-title">Sign Up</h2>
         <p className="login-description">Join us today! Sign up to access our exclusive and helpful contents</p>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <input type="text" placeholder="Your name" className="input-field" />
           <input type="email" placeholder="Your email" className="input-field" />
           <input type="password" placeholder="Password" className="input-field" />
           <input type="password" placeholder="Confirm password" className="input-field" />
-          <button type="submit" className="auth-button">Sign Up</button>
+          <button type="button" className="auth-button" onClick={handleSignUp}>
+            Sign Up
+          </button>
         </form>
         <p>Already have an account? <span className="link" onClick={handleLogin}>Log in</span></p>
 
