@@ -19,7 +19,7 @@
    align-items: flex-start;
   justify-content: space-between;
   align-items: center;
-  background-color: #e0f3dc;
+  background-color: #d6f5d6;
   border-radius: 2px;
   padding: 50px 20px 30px;
   margin-bottom: 5px;
@@ -52,8 +52,8 @@
   gap: 10px;
 }
 .notify-icon {
-  color: green;
-  font-size: 30px; /* optional, to make it bigger */
+  color: rgb(55, 155, 55);
+  font-size: 20px; /* optional, to make it bigger */
 }
 
 .search-bar {
