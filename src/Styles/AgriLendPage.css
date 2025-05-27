@@ -1,4 +1,5 @@
 
+
 .agrilend-container {
   display: flex;
   font-family: "Segoe UI", sans-serif;
@@ -8,25 +9,29 @@
 
 .agrilend-main {
   flex: 1;
-  padding: 70px;
+  padding: 1px;
   overflow-y: auto;
   
 }
 
 .agrilend-header {
   color: #2e7d32;
-  margin-bottom: 3px;
+ 
    align-items: flex-start;
   justify-content: space-between;
   align-items: center;
-  background-color: #e0f3dc;
+  background-color: #d6f5d6;
   border-radius: 2px;
-  padding: 50px 20px 30px;
-  margin-bottom: 5px;
+  padding: 10px 20px 30px 10px;;
+  margin-bottom: 1px;
   
 }
-
-
+.agrilend-header h1{
+  font-size: 2.0rem;
+}
+.agrilend-header p{
+  font-size: 0.8rem;
+}
 .agrilend-banner {
   display: flex;
   justify-content: space-between;
@@ -52,8 +57,8 @@
   gap: 10px;
 }
 .notify-icon {
-  color: green;
-  font-size: 30px; /* optional, to make it bigger */
+  color: rgb(55, 155, 55);
+  font-size: 20px; /* optional, to make it bigger */
 }
 
 .search-bar {
