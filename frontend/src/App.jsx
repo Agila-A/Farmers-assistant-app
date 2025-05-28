@@ -9,6 +9,7 @@ import AgriLendPage from './Pages/AgriLendPage';
 import Dashboard from './Components/Dashboard'; // ✅ Add this 
 import Layout from './Components/Layout';
 import BudgetTracker from './Pages/BudgetTracker';
+import AddExpenses from './Pages/AddExpenses';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/agrilend" element={<Layout><AgriLendPage /></Layout>} />
         <Route path="/schedule" element={<Layout><CalendarPage /></Layout>} />
         <Route path="/budget" element={<Layout><BudgetTracker /></Layout>} />
+        <Route path="/budget" element={<Layout><AddExpenses /></Layout>} />
 
       </Routes>
     </Router>
