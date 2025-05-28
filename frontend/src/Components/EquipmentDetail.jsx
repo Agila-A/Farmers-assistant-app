@@ -1,5 +1,8 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 // src/components/AgriLend/EquipmentDetail.jsx
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 import React from 'react';
@@ -10,6 +13,7 @@ export const EquipmentDetail = ({ equipment, onBack, onRequest }) => {
 
   return (
     <div className="equipment-detail">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
       <button onClick={onBack}>⬅</button>
       <img src={equipment.image} alt={equipment.name} width="80%" />
@@ -39,6 +43,8 @@ export const EquipmentDetail = ({ equipment, onBack, onRequest }) => {
         Request
       </button>
 =======
+=======
+>>>>>>> Stashed changes
       <button onClick={onBack}>⬅ Back</button>
       <img src={equipment.image} alt={equipment.name} width="100%" />
       <h2>{equipment.name}</h2>
@@ -52,6 +58,9 @@ export const EquipmentDetail = ({ equipment, onBack, onRequest }) => {
           Request for Rent
         </button>
       </div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     </div>
   );
