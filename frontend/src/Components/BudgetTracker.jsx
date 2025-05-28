@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/BudgetTracker.css'; 
+import '../Styles/BudgetTracker.css'; 
 
 const BudgetTracker = () => {
   const navigate = useNavigate();
