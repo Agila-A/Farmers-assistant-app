@@ -1,5 +1,6 @@
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 // src/components/AgriLend/RequestConfirmation.jsx
 import React from 'react';
@@ -23,6 +24,8 @@ const RequestConfirmation = ({ isSale = false, onDone }) => {
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 import React from 'react';
 import '../styles/AgriLendPage.css';
 import checkmarkImage from '../assets/checkmark.png'; // Use the checkmark image you used in your design
@@ -37,6 +40,9 @@ const RequestConfirmation = () => {
         Once accepted, you can proceed with the payment. If declined, you may explore other available equipment.
       </p>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
