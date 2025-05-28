@@ -4,6 +4,7 @@ import "../styles/AgriLendPage.css";
 
 const EquipmentCard = ({ equipment }) => {
   return (
+    
     <div className="equipment-card">
       <img src={equipment.image} alt={equipment.name} />
       <h3>{equipment.name}</h3>

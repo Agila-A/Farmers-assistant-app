@@ -1,3 +1,4 @@
+// src/components/AgriLend/EquipmentDetail.jsx
 import React from 'react';
 import '../styles/AgriLendPage.css';
 
@@ -5,13 +6,14 @@ export const EquipmentDetail = ({ equipment, onBack, onRequest }) => {
   if (!equipment) return null;
 
   return (
+    
     <div className="equipment-detail">
-      <button onClick={onBack}>⬅ Back</button>
-      <img src={equipment.image} alt={equipment.name} width="90%" />
-
+      <button onClick={onBack}>⬅</button>
+      <img src={equipment.image} alt={equipment.name} width="80%" />
       <h2>{equipment.name}</h2>
+      
+      <h3>Price: {equipment.price}</h3>
       <p>{equipment.description || 'This equipment is useful for farming.'}</p>
-      <h3>Price: ₹ {equipment.price}</h3>
 
       {/* Delivery Details Section */}
       <div className="equipment-section">
@@ -30,7 +32,7 @@ export const EquipmentDetail = ({ equipment, onBack, onRequest }) => {
       </div>
 
       <button className="cta-button" onClick={onRequest}>
-        Request for Rent
+        Request
       </button>
     </div>
   );
