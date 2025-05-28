@@ -6,7 +6,7 @@ import LandingPage from './Pages/LandingPage';
 import SignUpPage from './Pages/SignUpPage';
 import LoginPage from './Pages/LoginPage';
 import AgriLendPage from './Pages/AgriLendPage';
-import Dashboard from './Components/Dashboard'; // ✅ Add this
+import Dashboard from './Components/Dashboard'; // ✅ Add this 
 import Layout from './Components/Layout';
 
 const App = () => {
