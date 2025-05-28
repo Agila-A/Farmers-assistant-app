@@ -9,6 +9,7 @@ import AgriLendPage from './Pages/AgriLendPage';
 import Dashboard from './Components/Dashboard'; // ✅ Add this
 
 import Layout from './Components/Layout';
+import BudgetTracker from './Components/BudgetTracker';
 
 const App = () => {
   return (
