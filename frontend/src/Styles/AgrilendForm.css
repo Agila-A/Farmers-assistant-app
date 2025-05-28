@@ -1,0 +1,299 @@
+/* --- General Form Styles --- */
+body, html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+.form-container {
+  font-family: "Segoe UI", sans-serif;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.input-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-group input[type="text"],
+.input-group input[type="date"] {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.upload-image {
+  width: 100px;
+  height: 100px;
+  background-color: #d6edc6;
+  border: 2px dashed #8bc34a;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.upload-label {
+  font-size: 2rem;
+  color: #388e3c;
+  cursor: pointer;
+}
+
+.upload-image span {
+  font-size: 0.75rem;
+  color: #333;
+  margin-top: 0.3rem;
+}
+
+.deposit-policy {
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.deposit-policy strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+.delivery-box {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.delivery-box label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.location-input,
+.contact-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.agreement {
+  font-size: 0.95rem;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.submit-button,
+.cancel-button {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.submit-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: #388e3c;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #c62828;
+}
+
+.availability-group {
+  margin-bottom: 1.5rem;
+}
+
+.section-label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+/* --- Top Bar --- */
+.top-bar {
+  background-color: #e6f4dc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #ccc;
+  height: 64px;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  position: relative;  /* <- Add this */
+}
+
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+}
+
+.greeting h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #2d7c2d;
+  font-weight: 600;
+}
+
+.greeting p {
+  margin: 0.0;
+  font-size: 0.95rem;
+  color: #4caf50;
+}
+
+.request-button-container {
+  position: relative;
+}
+
+.request-button {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 0.45rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: red;
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+/* --- Page Container --- */
+.agrilend-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+
+}
+
+/* --- Main Section --- */
+.agrilend-main {
+  width: 100%;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding-top: 80px;
+}
+
+/* --- Banner --- */
+.agrilend-banner {
+  background-color: #f1f8e9;
+  width: 100%;
+  max-width: 1000px;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.request-button-container {
+  position: relative;
+  margin-right: 1rem; /* 👈 Pushes it to the left */
+}
+
+/* --- Banner Icons --- */
+.agrilend-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rent-icon {
+  font-size: 1rem;
+  background: #c5e1a5;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.notify-icon {
+  font-size: 1.25rem;
+}
+
+/* --- Search Bar --- */
+.search-bar {
+  width: 100%;
+  max-width: 1000px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+/* --- Equipment Cards --- */
+.equipment-list {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.equipment-card {
+  flex: 1 1 280px; /* Adjust to suit your card size */
+  max-width: 300px;
+  box-sizing: border-box;
+}
