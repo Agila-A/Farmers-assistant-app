@@ -7,7 +7,6 @@ import SignUpPage from './Pages/SignUpPage';
 import LoginPage from './Pages/LoginPage';
 import AgriLendPage from './Pages/AgriLendPage';
 import Dashboard from './Components/Dashboard'; // ✅ Add this
-import BudgetTracker from './Pages/BudgetTracker';
 import Layout from './Components/Layout';
 
 const App = () => {
