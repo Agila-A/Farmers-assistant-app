@@ -1,37 +1,46 @@
-.budget-container {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 20px;
+.budget-page {
   text-align: center;
-  background-color: #f8faf5;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  background-color: #f9fff9;
+}
+
+.budget-page h1 {
+  color: #2e7d32;
+  margin-bottom: 2rem;
+}
+
+.chart img {
+  width: 70%;
+  max-width: 600px;
+  height: auto;
+  border: 2px solid #c8e6c9;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.budget-title {
-  font-size: 2rem;
-  color: #2f6f2f;
-  margin-bottom: 40px;
-}
-
-.budget-buttons {
+.buttons {
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 2rem;
 }
 
-.budget-btn {
-  background-color: #3a7d44;
-  color: white;
+.add-expense,
+.track-expense {
+  background-color: #81c784;
+  padding: 1rem 2rem;
   border: none;
-  padding: 12px 30px;
-  border-radius: 6px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.budget-btn:hover {
-  background-color: #2c5d32;
+.add-expense:hover,
+.track-expense:hover {
+  background-color: #66bb6a;
 }
 
