@@ -6,9 +6,9 @@ import LandingPage from './Pages/LandingPage';
 import SignUpPage from './Pages/SignUpPage';
 import LoginPage from './Pages/LoginPage';
 import AgriLendPage from './Pages/AgriLendPage';
-import Dashboard from './Components/Dashboard'; // ✅ Add this
-
+import Dashboard from './Components/Dashboard'; // ✅ Add this 
 import Layout from './Components/Layout';
+import BudgetTracker from './Pages/BudgetTracker';
 
 const App = () => {
   return (
@@ -25,6 +25,8 @@ const App = () => {
         {/* ✅ Added */}
         <Route path="/agrilend" element={<Layout><AgriLendPage /></Layout>} />
         <Route path="/schedule" element={<Layout><CalendarPage /></Layout>} />
+        <Route path="/budget" element={<Layout><BudgetTracker /></Layout>} />
+
       </Routes>
     </Router>
   );
