@@ -6,9 +6,12 @@ import LandingPage from './Pages/LandingPage';
 import SignUpPage from './Pages/SignUpPage';
 import LoginPage from './Pages/LoginPage';
 import AgriLendPage from './Pages/AgriLendPage';
-import Dashboard from './Components/Dashboard'; // ✅ Add this 
+import Dashboard from './Components/Dashboard';
 import Layout from './Components/Layout';
 import BudgetTracker from './Pages/BudgetTracker';
+import CreateAccount from './Pages/CreateAccount'; 
+import SuccessPage from './Pages/SuccessPage';
+import Demo from './Pages/Demo';
 
 const App = () => {
   return (
@@ -18,15 +21,16 @@ const App = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/demo" element={<Demo />} />
 
         {/* Pages with sidebar */}
-        <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} /> 
+        <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
         <Route path="/community" element={<Layout><CommunityPage /></Layout>} />
-        {/* ✅ Added */}
         <Route path="/agrilend" element={<Layout><AgriLendPage /></Layout>} />
         <Route path="/schedule" element={<Layout><CalendarPage /></Layout>} />
         <Route path="/budget" element={<Layout><BudgetTracker /></Layout>} />
-
       </Routes>
     </Router>
   );
