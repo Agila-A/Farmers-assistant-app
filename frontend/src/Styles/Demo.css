@@ -1,0 +1,26 @@
+/* src/Styles/DemoPage.css */
+
+.demo-wrapper {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.demo-wrapper h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #4b8e2e;
+}
+
+.demo-wrapper p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.demo-wrapper iframe {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

@@ -11,7 +11,7 @@ const SignUpPage = () => {
 
   const handleSignUp = () => {
     // Placeholder for sign-up logic
-    navigate("/dashboard");
+    navigate("/create-account");
   };
 
   return (
