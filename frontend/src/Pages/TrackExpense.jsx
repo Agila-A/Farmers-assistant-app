@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './TrackExpense.css';
+import '../Styles/TrackExpense.css';
 import { FaEdit } from 'react-icons/fa';
 
 const expenses = [
@@ -34,25 +34,6 @@ function TrackExpense() {
 
   return (
     <div className="container">
-      {/* Sidebar */}
-      <div className="sidebar">
-        <div>
-          <h2>🌿 Farmer's Assistant</h2>
-          <ul>
-            <li>🏠 Home</li>
-            <li>📊 Dashboard</li>
-            <li>💰 AgriLend</li>
-            <li className="active">📈 Buget Tracker</li>
-            <li>💬 Let's chat</li>
-            <li>📅 Schedules</li>
-          </ul>
-        </div>
-        <div className="footer">
-          <p>⚙️ Settings</p>
-          <p>🔓 Logout</p>
-          <p>👤 User</p>
-        </div>
-      </div>
 
       {/* Main Content */}
       <div className="main">
