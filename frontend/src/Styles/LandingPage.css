@@ -1,0 +1,153 @@
+/* General Container */
+.landing-container {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar h1 {
+  color: #4CAF50;
+  font-size: 2.5rem;
+}
+
+.navbar nav a {
+  margin: 0 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.auth-buttons .login, .signup {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.signup {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.login {
+  background-color: transparent;
+  border: 2px solid #4CAF50;
+  color: #4CAF50;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 170px 20px;
+  background-image: url("./src/assets/farming-hero-image.png.png"); /* Ensure correct path and remove double extensions */
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+
+.hero-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #F1F1F1;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #F1F1F1;
+}
+
+.cta-buttons .cta-button, .learn-more {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.learn-more {
+  background-color: transparent;
+  border: 2px solid white;
+}
+
+.cta-buttons .cta-button:hover {
+  background-color: white;
+  color: #4CAF50;
+}
+
+/* Services Section */
+.services {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.services h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.services p {
+  margin-bottom: 2rem;
+}
+
+.service-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.service-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.service-card h4 {
+  margin-top: 10px;
+}
+
+/* Sustainable Farming Section */
+.sustainable-farming {
+  text-align: center;
+  padding: 170px 20px;
+  background-image: url("./src/assets/farming-hero-image2.png.png"); /* Ensure correct path and remove double extensions */
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.sustainable-farming h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Footer Section */
+footer {
+  background-color: #F1F1F1;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+footer h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.footer-image {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}

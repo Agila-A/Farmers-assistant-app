@@ -1,0 +1,58 @@
+/* src/Styles/SuccessPage.css */
+
+.success-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #d6e5c6; /* light green background */
+  padding: 1rem;
+}
+
+.success-card {
+  background-color: #f3f3f3;
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.success-image {
+  max-width: 250px;
+  margin-bottom: 2rem;
+}
+
+.success-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #7b572b; /* warm brown text */
+  font-weight: bold;
+}
+
+.success-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.success-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.success-button.green {
+  background-color: #2f7d32;
+  color: #fff;
+}
+
+.success-button.green:hover {
+  background-color: #256b28;
+}
