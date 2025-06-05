@@ -10,7 +10,7 @@ import Dashboard from './Components/Dashboard';
 import Layout from './Components/Layout';
 import BudgetTracker from './Pages/BudgetTracker';
 import TrackExpense from './Pages/TrackExpense';
-
+import PrivateRoute from './Components/PrivateRoute';
 import CreateAccount from './Pages/CreateAccount'; 
 import SuccessPage from './Pages/SuccessPage';
 import Demo from './Pages/Demo';
@@ -19,7 +19,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Pages without sidebar */}
+        {/* Public pages */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -27,14 +27,55 @@ const App = () => {
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/demo" element={<Demo />} />
 
-        {/* Pages with sidebar */}
-        <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-        <Route path="/community" element={<Layout><CommunityPage /></Layout>} />
-        <Route path="/agrilend" element={<Layout><AgriLendPage /></Layout>} />
-        <Route path="/schedule" element={<Layout><CalendarPage /></Layout>} />
-        <Route path="/budget" element={<Layout><BudgetTracker /></Layout>} />
-        <Route path="/track-expense" element={<Layout><TrackExpense /></Layout>} />
-
+        {/* Protected pages (with sidebar) */}
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Layout><Dashboard /></Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/community"
+          element={
+            <PrivateRoute>
+              <Layout><CommunityPage /></Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/agrilend"
+          element={
+            <PrivateRoute>
+              <Layout><AgriLendPage /></Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/schedule"
+          element={
+            <PrivateRoute>
+              <Layout><CalendarPage /></Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/budget"
+          element={
+            <PrivateRoute>
+              <Layout><BudgetTracker /></Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/track-expense"
+          element={
+            <PrivateRoute>
+              <Layout><TrackExpense /></Layout>
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
