@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EquipmentCard from '../Components/EquipmentCard';
 import { EquipmentDetail } from '../Components/EquipmentDetail';
 import RequestConfirmation from '../Components/RequestConfirmation';
 import AgrilendForm from '../components/AgrilendForm';
+import Payment from '../Components/Payment';
+
 import "../styles/AgriLendPage.css";
 
 import tractorImage from '../assets/tractor.png';
@@ -16,26 +18,43 @@ const dummyData = [
   { id: 3, name: "Iron gravity Conveyor", price: "₹ 3000", owner: "Suresh", location: "Madurai", image: conveyorImage },
 ];
 
+const approvedNotifications = [
+  { id: 1, equipmentName: "Tractor with tipper", approved: true }
+];
+
 const AgriLendPage = () => {
   const [selectedEquipment, setSelectedEquipment] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [triggeredByNotification, setTriggeredByNotification] = useState(false);
   const [listedEquipment, setListedEquipment] = useState([...dummyData]);
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleRequest = () => {
     setShowConfirmation(true);
+    setTimeout(() => {
+      setShowConfirmation(false);
+      setShowPayment(true);
+    }, 2000);
   };
 
   const handleBack = () => {
     setShowConfirmation(false);
+    setShowPayment(false);
     setSelectedEquipment(null);
     setShowForm(false);
   };
 
   const handleDone = () => {
-    setShowConfirmation(false);
-    setSelectedEquipment(null);
+    if (triggeredByNotification) {
+      setTriggeredByNotification(false);
+      setShowPayment(false);
+    } else {
+      setShowConfirmation(false);
+      setShowPayment(false);
+      setSelectedEquipment(null);
+    }
   };
 
   const handleAddEquipment = (newEquipment) => {
@@ -50,17 +69,25 @@ const AgriLendPage = () => {
 
   return (
     <div className="agrilend-container">
-      {/* 🔝 Top Bar always visible */}
       <div className="top-bar">
         <div className="greeting">
           <h1>🌿 AGRILEND</h1>
-          
         </div>
       </div>
 
       <main className="agrilend-main">
         <AnimatePresence mode="wait">
-          {showConfirmation ? (
+          {showPayment ? (
+            <motion.div
+              key="payment"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Payment />
+            </motion.div>
+          ) : showConfirmation ? (
             <motion.div
               key="confirmation"
               initial={{ opacity: 0, x: 50 }}
@@ -108,8 +135,23 @@ const AgriLendPage = () => {
               <div className="agrilend-banner">
                 <p>➡️ Click here to rent your farm items and equipment</p>
                 <div className="agrilend-icons">
-                  <button onClick={() => setShowForm(true)}><span className="rent-icon">RENT</span></button>
-                  <span className="notify-icon">🔔</span>
+                  <button onClick={() => setShowForm(true)}>
+                    <span className="rent-icon">RENT</span>
+                  </button>
+                  <span
+                    className="notify-icon"
+                    onClick={() => {
+                      if (approvedNotifications.length > 0) {
+                        setTriggeredByNotification(true);
+                        setShowPayment(true);
+                      }
+                    }}
+                  >
+                    🔔
+                    {approvedNotifications.length > 0 && (
+                      <span className="badge">{approvedNotifications.length}</span>
+                    )}
+                  </span>
                 </div>
               </div>
 
@@ -137,3 +179,4 @@ const AgriLendPage = () => {
 };
 
 export default AgriLendPage;
+

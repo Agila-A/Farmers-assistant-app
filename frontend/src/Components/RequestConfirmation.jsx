@@ -1,4 +1,3 @@
-// src/components/AgriLend/RequestConfirmation.jsx
 import React from 'react';
 import '../styles/AgriLendPage.css';
 import checkmarkImage from '../assets/checkmark.png';
