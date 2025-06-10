@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase"; // adjust if needed
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase";
 import "../Styles/AuthPages.css";
 
 const LoginPage = () => {
@@ -20,6 +20,16 @@ const LoginPage = () => {
       navigate("/dashboard");
     } catch (err) {
       alert("Login failed: " + err.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      navigate("/dashboard");
+    } catch (err) {
+      alert("Google login failed: " + err.message);
     }
   };
 
@@ -50,6 +60,15 @@ const LoginPage = () => {
             Log In
           </button>
         </form>
+
+        <div className="social-login">
+          <p>Or log in with</p>
+          <button className="google-button" onClick={handleGoogleLogin}>
+            <img src="/src/assets/GoogleIcon.webp" alt="Google icon" style={{ width: '20px', marginRight: '8px' }} />
+            Sign in with Google
+          </button>
+        </div>
+
         <p className="forgot-password">Forget password?</p>
         <p>Don't have an account? <span className="link" onClick={() => navigate("/signup")}>Sign up</span></p>
       </div>
