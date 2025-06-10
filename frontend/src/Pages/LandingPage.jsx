@@ -24,14 +24,7 @@ const LandingPage = () => {
       {/* Header Section */}
       <header className="navbar">
         <h1>Farmer's Assistant</h1>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/schedule">Schedule</Link>
-          <Link to="/agrilend">AgriLend</Link>
-          <Link to="/chatbot">Chatbot</Link>
-          <Link to="/budget">Budget</Link>
-          <Link to="/community">Community</Link>
-        </nav>
+
         <div className="auth-buttons">
           <button className="login" onClick={handleLogin}>Login</button>
           <button className="signup" onClick={handleGetStarted}>Sign up</button>
