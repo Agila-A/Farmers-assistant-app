@@ -1,48 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../firebase";
 import "../Styles/AuthPages.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/Dashboard");
-    } catch (error) {
-      alert("Login failed: " + error.message);
-    }
+  const handleSignUp = () => {
+    navigate("/signup");
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      await signInWithPopup(auth, provider);
-      navigate("/Dashboard");
-    } catch (error) {
-      alert("Google sign-in failed: " + error.message);
-    }
+  const handleLogin = () => {
+    // Placeholder for authentication logic
+    navigate("/Dashboard");
   };
 
   return (
     <div className="auth-container">
+      {/* Left section with image */}
       <div className="image-section">
         <img src="./src/assets/farmer.png" alt="Farmer" className="login-image" />
       </div>
+
+      {/* Right section with login form */}
       <div className="form-section">
         <h2 className="login-title">Login</h2>
-        <p className="login-description">Welcome back!</p>
+        <p className="login-description">Welcome back! Log in to access our exclusive and helpful contents</p>
         <form onSubmit={(e) => e.preventDefault()}>
-          <input type="email" placeholder="Your email" className="input-field" value={email} onChange={e => setEmail(e.target.value)} />
-          <input type="password" placeholder="Password" className="input-field" value={password} onChange={e => setPassword(e.target.value)} />
-          <button type="button" className="auth-button" onClick={handleLogin}>Log In</button>
+          <input type="email" placeholder="Your email" className="input-field" />
+          <input type="password" placeholder="Password" className="input-field" />
+          <button type="button" className="auth-button" onClick={handleLogin}>
+            Log In
+          </button>
         </form>
         <p className="forgot-password">Forget password?</p>
-        <button className="google-button" onClick={handleGoogleLogin}>Sign in with Google</button>
-        <p>Don't have an account? <span className="link" onClick={() => navigate("/signup")}>Sign up</span></p>
+        <p>Don't have an account? <span className="link" onClick={handleSignUp}>Sign up</span></p>
+
+        <div className="social-login">
+          <p>or continue with</p>
+          <div className="social-buttons">
+            <button className="social-icon google"></button>
+            <button className="social-icon facebook"></button>
+            <button className="social-icon apple"></button>
+          </div>
+        </div>
       </div>
     </div>
   );

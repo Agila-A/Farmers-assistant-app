@@ -1,20 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase"; // make sure path is correct
 import "../Styles/Sidebar.css";
+ // Move the CSS you wrote into this file
 
 const Sidebar = () => {
   const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate("/login"); // Redirect to login page after logout
-    } catch (error) {
-      alert("Logout failed: " + error.message);
-    }
-  };
 
   return (
     <div className="sidebar">
@@ -30,7 +20,7 @@ const Sidebar = () => {
       </ul>
       <div className="sidebar-footer">
         <li onClick={() => navigate('/settings')}><span>⚙️</span> Settings</li>
-        <li onClick={handleLogout}><span>🚪</span> Logout</li>
+        <li onClick={() => navigate('/logout')}><span>🚪</span> Logout</li>
       </div>
     </div>
   );
