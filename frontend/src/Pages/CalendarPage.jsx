@@ -1,6 +1,6 @@
 // src/pages/CalendarPage.jsx
 import React, { useState } from 'react';
-import Calendar from '../components/Calendar';
+import Calendar from '../Components/Calendar';
 
 const CalendarPage = () => {
   const [events, setEvents] = useState([]);

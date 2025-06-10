@@ -1,9 +1,10 @@
+// BudgetTracker.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // import useNavigate
 import '../Styles/BudgetTracker.css';
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-const expenses = [80, 30, 45, 75, 20, 28, 90, 55, 10, 25, 70, 50]; // sample data
+const expenses = [80, 30, 45, 75, 20, 28, 90, 55, 10, 25, 70, 50];
 
 function BudgetTracker() {
   const navigate = useNavigate(); // initialize navigate

@@ -1,32 +1,44 @@
-
+/* Container styling */
 .agrilend-container {
   display: flex;
   font-family: "Segoe UI", sans-serif;
   height: 100vh;
   background-color: #fdfefd;
+  
 }
 
+.top-bar .greeting h1 {
+  font-size: 36px; /* adjust as needed */
+  font-weight: bold;
+  color: #2e7d32;  /* optional: for a stronger green */
+  margin: 0;
+}
+
+.top-bar {
+  padding: 40px 50px; /* increase vertical spacing */
+}
+
+/* Main content */
 .agrilend-main {
   flex: 1;
-  padding: 70px;
+  padding: 10px;
   overflow-y: auto;
-  
 }
 
+/* Header */
 .agrilend-header {
   color: #2e7d32;
-  margin-bottom: 3px;
-   align-items: flex-start;
   justify-content: space-between;
   align-items: center;
-  background-color: #e0f3dc;
+  background-color: #d6f5d6;
   border-radius: 2px;
-  padding: 50px 20px 30px;
-  margin-bottom: 5px;
+  padding: 10px;
+  margin-bottom: 2px;
+  display: flex;
   
 }
 
-
+/* Banner */
 .agrilend-banner {
   display: flex;
   justify-content: space-between;
@@ -35,6 +47,7 @@
   border-radius: 8px;
   padding: 10px 20px;
   margin-bottom: 20px;
+  
 }
 
 .agrilend-banner button {
@@ -46,16 +59,19 @@
   cursor: pointer;
 }
 
+/* Icons */
 .agrilend-icons {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .notify-icon {
-  color: green;
-  font-size: 30px; /* optional, to make it bigger */
+  color: rgb(55, 155, 55);
+  font-size: 20px;
 }
 
+/* Search Bar */
 .search-bar {
   width: 100%;
   padding: 10px;
@@ -64,6 +80,7 @@
   border-radius: 6px;
 }
 
+/* Equipment List */
 .equipment-list {
   display: flex;
   flex-wrap: wrap;
@@ -75,7 +92,7 @@
   padding: 15px;
   width: 200px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .equipment-card img {
@@ -109,6 +126,8 @@
   border-radius: 4px;
   margin-top: 5px;
 }
+
+/* Equipment Detail Overlay */
 .equipment-detail-overlay {
   position: fixed;
   top: 0;
@@ -126,7 +145,7 @@
   background: #fff;
   padding: 30px;
   border-radius: 12px;
-  width: 400px;
+  width: 600px;
   position: relative;
   text-align: center;
 }
@@ -147,27 +166,116 @@
   font-size: 20px;
   cursor: pointer;
 }
+
+/* CTA Button */
 .cta-button {
-  background-color: orange;
+  background-color: rgb(75, 147, 83);
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .cta-button:hover {
-  background-color: darkorange;
+  background-color: #f89a03;
 }
+
+/* Equipment Detail */
+.equipment-detail {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.equipment-detail button {
+  color: #f3f5f9;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.equipment-detail img {
+  display: block;
+  margin: 0 auto 20px;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.equipment-detail h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.equipment-detail h6 {
+  font-size: 16px;
+  margin: 8px 0;
+  color: #6c6a6a;
+  text-align: center;
+}
+
+.equipment-detail h3 {
+  font-size: 20px;
+  margin: 16px 0 10px;
+  color: rgb(75, 147, 83);
+  text-align: center;
+}
+
+.equipment-detail h4 {
+  font-size: 18px;
+  margin-top: 20px;
+  color: #333;
+}
+
+.equipment-detail .delivery-note,
+.equipment-detail .pickup-note {
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 6px;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 1600px) {
+  .equipment-detail {
+    padding: 100px ;
+  }
+
+  .equipment-detail h2 {
+    font-size: 22px;
+  }
+
+  .equipment-detail h3 {
+    font-size: 18px;
+  }
+
+  .cta-button {
+    width: 85%;
+    font-size: 15px;
+    
+  }
+}
+
+/* Request Confirmation */
 .request-confirmation {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 4rem;
+  margin-top: 0rem;
   padding: 2rem;
-  background-color: #f4fff6; /* subtle green background */
+  background-color: #f4fff6;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.6s ease-in-out;
@@ -175,7 +283,7 @@
 
 .request-confirmation .checkmark {
   font-size: 4rem;
-  color: #28a745; /* green checkmark */
+  color: #28a745;
   margin-bottom: 1rem;
 }
 
@@ -194,7 +302,6 @@
   line-height: 1.5;
 }
 
-/* Optional smooth fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;

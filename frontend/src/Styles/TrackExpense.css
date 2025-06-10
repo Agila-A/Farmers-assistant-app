@@ -1,0 +1,119 @@
+
+/* Main content */
+.main {
+  flex: 1;
+  padding: 24px 40px;
+}
+
+/* Header */
+.header {
+  font-size: 36px;
+  font-weight: bold;
+  color: #3d9140;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.tabs button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: white;
+  color: #555;
+}
+
+.tabs button.active {
+  background-color: #a6d78c;
+  color: black;
+}
+
+/* Expense list */
+.expense-box {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 700px;
+  margin: auto;
+  padding: 24px;
+}
+
+.expense-box h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.expense-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.expense-icon {
+  font-size: 24px;
+}
+
+.expense-details p {
+  margin: 0;
+}
+
+.expense-details p:first-child {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.expense-details p:last-child {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Amount */
+.expense-right {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Edit Button */
+.edit-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.edit-btn button {
+  background-color: #c9ecae;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s;
+}
+
+.edit-btn button:hover {
+  background-color: #addc91;
+}
