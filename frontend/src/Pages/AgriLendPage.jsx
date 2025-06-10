@@ -7,7 +7,6 @@ import AgrilendForm from '../components/AgrilendForm';
 import Payment from '../Components/Payment';
 
 import "../styles/AgriLendPage.css";
-
 import tractorImage from '../assets/tractor.png';
 import manureImage from '../assets/organicManure.png';
 import conveyorImage from '../assets/conveyor.png';

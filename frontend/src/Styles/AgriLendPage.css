@@ -8,7 +8,7 @@
 }
 
 .top-bar .greeting h1 {
-  font-size: 36px; /* adjust as needed */
+  font-size: 36px;
   font-weight: bold;
   color: #2e7d32;  /* optional: for a stronger green */
   margin: 0;

@@ -5,7 +5,6 @@ import confirmationImage from "../assets/paymentConfirm.png"; // Similar to chec
 
 const PaymentConfirmed = () => {
   const navigate = useNavigate();
-
   const handleDone = () => {
     navigate("/agrilend");
   };

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Added for navigation
 import "../styles/AgriLendPage.css";
 import tractorImage from "../assets/tractor.png";
-
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const navigate = useNavigate(); // Hook for routing

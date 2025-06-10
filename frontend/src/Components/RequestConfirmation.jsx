@@ -19,5 +19,4 @@ const RequestConfirmation = ({ isSale = false, onDone }) => {
     </div>
   );
 };
-
 export default RequestConfirmation;

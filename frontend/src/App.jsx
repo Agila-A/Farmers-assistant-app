@@ -12,8 +12,6 @@ import BudgetTracker from './Pages/BudgetTracker';
 import CreateAccount from './Pages/CreateAccount'; 
 import SuccessPage from './Pages/SuccessPage';
 import Demo from './Pages/Demo';
-
-// 💳 New Components
 import Payment from './Components/Payment';
 import PaymentConfirmed from './Components/PaymentConfirmed';
 
@@ -35,8 +33,6 @@ const App = () => {
         <Route path="/agrilend" element={<Layout><AgriLendPage /></Layout>} />
         <Route path="/schedule" element={<Layout><CalendarPage /></Layout>} />
         <Route path="/budget" element={<Layout><BudgetTracker /></Layout>} />
-
-        {/* Payment Flow Routes */}
         <Route path="/payment" element={<Layout><Payment /></Layout>} />
         <Route path="/payment-confirmed" element={<Layout><PaymentConfirmed /></Layout>} />
       </Routes>
