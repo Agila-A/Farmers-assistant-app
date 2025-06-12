@@ -1,4 +1,3 @@
-// src/components/AgriLend/RequestConfirmation.jsx
 import React from 'react';
 import '../styles/AgriLendPage.css';
 import checkmarkImage from '../assets/checkmark.png';
@@ -20,5 +19,4 @@ const RequestConfirmation = ({ isSale = false, onDone }) => {
     </div>
   );
 };
-
 export default RequestConfirmation;
