@@ -23,16 +23,9 @@ const Sidebar = () => {
       <h3>Farmer’s Assistant</h3>
 
       {/* Show user info if logged in */}
-      {user && (
-        <div className="user-info" style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
-          <p><strong>{user.displayName || "User"}</strong></p>
-          <p>{user.email}</p>
-        </div>
-      )}
-
+      
       <ul>
-        <li onClick={() => navigate('/')}><span>🏠</span> Home</li>
-        <li onClick={() => navigate('/dashboard')}><span>📊</span> Dashboard</li>
+        <li onClick={() => navigate('/dashboard')}><span>🏠</span> Home</li>
         <li onClick={() => navigate('/agrilend')}><span>🚜</span> AgriLend</li>
         <li onClick={() => navigate('/budget')}><span>💰</span> Budget Tracker</li>
         <li onClick={() => navigate('/chat')}><span>💬</span> Let’s Chat</li>
@@ -44,6 +37,14 @@ const Sidebar = () => {
         <li onClick={() => navigate('/settings')}><span>⚙️</span> Settings</li>
         <li onClick={handleLogout}><span>🚪</span> Logout</li>
       </div>
+
+      {user && (
+        <div className="user-info" style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
+          <p><strong>{user.displayName || "User"}</strong></p>
+          <p>{user.email}</p>
+        </div>
+      )}
+
     </div>
   );
 };

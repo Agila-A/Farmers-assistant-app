@@ -19,11 +19,8 @@ A modern web app built to **empower farmers** with easy access to tools like equ
 
 ## 🛠️ Tech Stack
 
-| Frontend | Backend / Auth | Database / Hosting |
-|----------|----------------|---------------------|
-| React.js ⚛️ | Firebase Auth 🔐 | Firestore DB 🔥 |
-| React Router 🧭 | Firebase Functions ⚙️ | 
-| CSS Modules 🎨 | Firebase SDK 📦 | Netlify |
+Frontend - React.js ⚛️ CSS Modules 🎨
+Backend  - Firebase Auth 🔐 Firebase SDK 📦 Firestore DB 🔥
 
 ---
 

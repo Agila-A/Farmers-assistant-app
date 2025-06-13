@@ -17,7 +17,8 @@ import SuccessPage from './Pages/SuccessPage';
 import Demo from './Pages/Demo';
 import Payment from './Components/Payment';
 import PaymentConfirmed from './Components/PaymentConfirmed';
-import PrivateRoute from './Components/PrivateRoute'; // Make sure this is defined correctly
+import TrackExpense from './Pages/TrackExpense';
+import PrivateRoute from './Components/PrivateRoute'; 
 
 const App = () => {
   return (
@@ -97,6 +98,14 @@ const App = () => {
             </PrivateRoute>
           } 
         />
+        <Route
+  path="/track-expense"
+  element={
+    <PrivateRoute>
+      <Layout><TrackExpense /></Layout>
+    </PrivateRoute>
+  }
+/>
       </Routes>
     </Router>
   );
