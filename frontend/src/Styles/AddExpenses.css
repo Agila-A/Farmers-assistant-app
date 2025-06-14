@@ -1,9 +1,27 @@
+.expense-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4faef;
+}
+
+/* Assuming your Sidebar takes 250px width */
+.add-expense-page {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f4faef;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-y: auto;
+}
+
 .add-expense-page {
   padding: 2rem;
   background-color: #f4faef;
-  min-height: 100vh;
+  height: 100%;         /* ✅ change from min-height: 100vh */
+  width: 100%;
   font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
 }
+
 
 .form-title {
    color: #2e7d32;
@@ -134,4 +152,18 @@ textarea {
   margin-right: 35%;
 }
 
+.file-preview {
+  margin-top: 20px;
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.receipt-preview-img {
+  margin-top: 10px;
+  max-width: 300px;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
 

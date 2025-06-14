@@ -9,9 +9,7 @@ import AgriLendPage from './Pages/AgriLendPage';
 import Dashboard from './Components/Dashboard';
 import Layout from './Components/Layout';
 import BudgetTracker from './Pages/BudgetTracker';
-
 import AddExpenses from './Components/AddExpenses'; 
-
 import CreateAccount from './Pages/CreateAccount'; 
 import SuccessPage from './Pages/SuccessPage';
 import Demo from './Pages/Demo';
@@ -38,7 +36,7 @@ const App = () => {
         <Route path="/schedule" element={<Layout><CalendarPage /></Layout>} />
         <Route path="/budget" element={<Layout><BudgetTracker /></Layout>} />
         <Route path="/add-expenses" element={<Layout><AddExpenses /></Layout>} />
-        
+        <Route path="/track-expenses"element={<Layout><TrackExpense /></Layout>}/>
 
 
         {/* Protected Routes (Require Login) */}
@@ -99,7 +97,7 @@ const App = () => {
           } 
         />
         <Route
-  path="/track-expense"
+  path="/track-expenses"
   element={
     <PrivateRoute>
       <Layout><TrackExpense /></Layout>

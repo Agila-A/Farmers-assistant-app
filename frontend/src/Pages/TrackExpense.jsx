@@ -34,8 +34,6 @@ function TrackExpense() {
 
   return (
     <div className="container">
-
-      {/* Main Content */}
       <div className="main">
         <div className="header">TRACK EXPENSE</div>
 
