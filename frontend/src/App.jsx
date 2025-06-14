@@ -15,7 +15,8 @@ import Demo from './Pages/Demo';
 import Payment from './Components/Payment';
 import PaymentConfirmed from './Components/PaymentConfirmed';
 import PrivateRoute from './Components/PrivateRoute'; // Make sure this is defined correctly
-
+import AgrilendForm from './components/AgrilendForm'; 
+import RequestsScreen from './components/RequestsScreen'; 
 const App = () => {
   return (
     <Router>
@@ -27,6 +28,8 @@ const App = () => {
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/demo" element={<Demo />} />
+         <Route path="/" element={<AgrilendForm />} />
+        <Route path="/requests" element={<RequestsScreen />} />
 
         {/* Protected Routes (Require Login) */}
         <Route 
