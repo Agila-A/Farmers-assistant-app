@@ -1,22 +1,23 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CommunityPage from './Pages/CommunityPage';
-import CalendarPage from './Pages/CalendarPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './Pages/LandingPage';
 import SignUpPage from './Pages/SignUpPage';
 import LoginPage from './Pages/LoginPage';
+import Dashboard from './Pages/Dashboard';
+import CommunityPage from './Pages/CommunityPage';
 import AgriLendPage from './Pages/AgriLendPage';
-import Dashboard from './Components/Dashboard';
+import CalendarPage from './Pages/CalendarPage';
 import Layout from './Components/Layout';
 import BudgetTracker from './Pages/BudgetTracker';
-import AddExpenses from './Components/AddExpenses'; 
-import CreateAccount from './Pages/CreateAccount'; 
+import AddExpenses from './Components/AddExpenses';
+import TrackExpense from './Pages/TrackExpense';
+import CreateAccount from './Pages/CreateAccount';
 import SuccessPage from './Pages/SuccessPage';
 import Demo from './Pages/Demo';
 import Payment from './Components/Payment';
 import PaymentConfirmed from './Components/PaymentConfirmed';
-import TrackExpense from './Pages/TrackExpense';
-import PrivateRoute from './Components/PrivateRoute'; 
+import PrivateRoute from './Components/PrivateRoute';
+import AgrilendForm from './components/AgrilendForm';
+import RequestsScreen from './components/RequestsScreen';
 
 const App = () => {
   return (
@@ -29,15 +30,10 @@ const App = () => {
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/demo" element={<Demo />} />
-        {/* Pages with sidebar */}
-        <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-        <Route path="/community" element={<Layout><CommunityPage /></Layout>} />
-        <Route path="/agrilend" element={<Layout><AgriLendPage /></Layout>} />
-        <Route path="/schedule" element={<Layout><CalendarPage /></Layout>} />
-        <Route path="/budget" element={<Layout><BudgetTracker /></Layout>} />
-        <Route path="/add-expenses" element={<Layout><AddExpenses /></Layout>} />
-        <Route path="/track-expenses"element={<Layout><TrackExpense /></Layout>}/>
 
+        {/* Custom Pages */}
+        <Route path="/agrilend-form" element={<AgrilendForm />} />
+        <Route path="/requests" element={<RequestsScreen />} />
 
         {/* Protected Routes (Require Login) */}
         <Route 
@@ -81,6 +77,22 @@ const App = () => {
           } 
         />
         <Route 
+          path="/add-expenses" 
+          element={
+            <PrivateRoute>
+              <Layout><AddExpenses /></Layout>
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/track-expenses" 
+          element={
+            <PrivateRoute>
+              <Layout><TrackExpense /></Layout>
+            </PrivateRoute>
+          } 
+        />
+        <Route 
           path="/payment" 
           element={
             <PrivateRoute>
@@ -96,14 +108,6 @@ const App = () => {
             </PrivateRoute>
           } 
         />
-        <Route
-  path="/track-expenses"
-  element={
-    <PrivateRoute>
-      <Layout><TrackExpense /></Layout>
-    </PrivateRoute>
-  }
-/>
       </Routes>
     </Router>
   );

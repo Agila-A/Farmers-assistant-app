@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../styles/AgriLendForm.css";
 
 const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
   const [form, setForm] = useState({
     name: '', equipment: '', price: '', delivery: true, location: '', from: '', to: '', contact: '', agree: false, image: null,
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -14,7 +17,7 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
     else if (name === 'price' || name === 'contact') validatedValue = value.replace(/[^0-9]/g, '');
 
     if (type === 'checkbox') setForm(prev => ({ ...prev, [name]: checked }));
-    else if (type === 'file') setForm(prev => ({ ...prev, image: files[0] })); 
+    else if (type === 'file') setForm(prev => ({ ...prev, image: files[0] }));
     else setForm(prev => ({ ...prev, [name]: validatedValue }));
   };
 
@@ -33,6 +36,10 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
     alert('Equipment listed successfully!');
   };
 
+  const handleRequestClick = () => {
+    navigate('/requests'); // This navigates to the request screen
+  };
+
   return (
     <>
       <div className="top-bar">
@@ -41,7 +48,7 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
           <p>Rent Out Your Equipment Today!</p>
         </div>
         <div className="request-button-container">
-          <button className="request-button">
+          <button className="request-button" onClick={handleRequestClick}>
             Request <span className="notification-badge">2</span>
           </button>
         </div>
@@ -99,6 +106,3 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
 };
 
 export default AgrilendForm;
-
-
-
