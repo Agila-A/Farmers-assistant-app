@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './Pages/LandingPage';
 import SignUpPage from './Pages/SignUpPage';
 import LoginPage from './Pages/LoginPage';
-import Dashboard from './Pages/Dashboard';
+import Dashboard from './Components/Dashboard';
 import CommunityPage from './Pages/CommunityPage';
 import AgriLendPage from './Pages/AgriLendPage';
 import CalendarPage from './Pages/CalendarPage';
