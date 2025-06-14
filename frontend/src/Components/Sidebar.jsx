@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, getDoc } from 'firebase/firestore';
 import "../Styles/Sidebar.css";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (user) {
+        const profileRef = doc(db, 'farmers', user.uid);
+        const profileSnap = await getDoc(profileRef);
+        if (profileSnap.exists()) {
+          setProfile(profileSnap.data());
+        }
+      }
+    };
+    fetchProfile();
+  }, [user]);
 
   const handleLogout = async () => {
     try {
@@ -22,8 +37,6 @@ const Sidebar = () => {
     <div className="sidebar">
       <h3>Farmer’s Assistant</h3>
 
-      {/* Show user info if logged in */}
-      
       <ul>
         <li onClick={() => navigate('/dashboard')}><span>🏠</span> Home</li>
         <li onClick={() => navigate('/agrilend')}><span>🚜</span> AgriLend</li>
@@ -34,17 +47,17 @@ const Sidebar = () => {
       </ul>
 
       <div className="sidebar-footer">
+        <li onClick={() => navigate('/profile')}><span>🌾</span> Profile</li>
         <li onClick={() => navigate('/settings')}><span>⚙️</span> Settings</li>
         <li onClick={handleLogout}><span>🚪</span> Logout</li>
       </div>
 
       {user && (
         <div className="user-info" style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
-          <p><strong>{user.displayName || "User"}</strong></p>
+          <p><strong>{profile?.name || user.displayName || "User"}</strong></p>
           <p>{user.email}</p>
         </div>
       )}
-
     </div>
   );
 };

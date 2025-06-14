@@ -24,7 +24,7 @@ const SignUpPage = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       alert("Signup successful!");
-      navigate("/dashboard");
+      navigate("/create-account");  // go to CreateAccount page
     } catch (err) {
       alert("Signup failed: " + err.message);
     }
@@ -34,7 +34,7 @@ const SignUpPage = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      navigate("/dashboard");
+      navigate("/create-account");  // also go to create-account for first time
     } catch (err) {
       alert("Google sign-in failed: " + err.message);
     }
@@ -50,37 +50,11 @@ const SignUpPage = () => {
         <h2 className="login-title">Sign Up</h2>
         <p className="login-description">Join us today! Sign up to access our exclusive and helpful contents</p>
         <form onSubmit={(e) => e.preventDefault()}>
-          <input
-            type="text"
-            placeholder="Your name"
-            className="input-field"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Your email"
-            className="input-field"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="input-field"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm password"
-            className="input-field"
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-          />
-          <button type="button" className="auth-button" onClick={handleSignUp}>
-            Sign Up
-          </button>
+          <input type="text" placeholder="Your name" className="input-field" value={name} onChange={(e) => setName(e.target.value)} />
+          <input type="email" placeholder="Your email" className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="password" placeholder="Password" className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" placeholder="Confirm password" className="input-field" value={confirm} onChange={(e) => setConfirm(e.target.value)} />
+          <button type="button" className="auth-button" onClick={handleSignUp}>Sign Up</button>
         </form>
 
         <div className="social-login">

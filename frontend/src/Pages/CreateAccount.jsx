@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/CreateAccount.css';
+import { db, auth } from '../firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 const CreateAccount = () => {
   const [step, setStep] = useState(1);
@@ -8,9 +10,7 @@ const CreateAccount = () => {
 
   const [farmerDetails, setFarmerDetails] = useState({
     name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    email: ''
   });
 
   const [landDetails, setLandDetails] = useState({
@@ -20,19 +20,52 @@ const CreateAccount = () => {
     irrigationType: '',
   });
 
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (user) {
+      setFarmerDetails({
+        name: user.displayName || '',
+        email: user.email || ''
+      });
+    }
+  }, []);
+
   const handleNext = (e) => {
     e.preventDefault();
-    // Optionally validate farmer details before moving to the next step
+    if (!farmerDetails.name || !farmerDetails.email) {
+      alert("Name and email are required.");
+      return;
+    }
     setStep(2);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Save data to backend
-    console.log('Farmer Details:', farmerDetails);
-    console.log('Land Details:', landDetails);
-    alert('Account successfully created!');
-    navigate('/success');
+    const user = auth.currentUser;
+
+    if (!user) {
+      alert("User not authenticated.");
+      return;
+    }
+
+    const userData = {
+      name: farmerDetails.name,
+      email: farmerDetails.email,
+      landSize: landDetails.landSize,
+      location: landDetails.location,
+      soilType: landDetails.soilType,
+      irrigationType: landDetails.irrigationType,
+      createdAt: new Date(),
+    };
+
+    try {
+      await setDoc(doc(db, "farmers", user.uid), userData);
+      alert('Account successfully created!');
+      navigate('/success');
+    } catch (error) {
+      console.error("Error saving to Firestore:", error);
+      alert("Something went wrong while saving data.");
+    }
   };
 
   const handleChange = (e, setStateFunc) => {
@@ -62,24 +95,7 @@ const CreateAccount = () => {
                 placeholder="Your email"
                 name="email"
                 value={farmerDetails.email}
-                onChange={(e) => handleChange(e, setFarmerDetails)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={farmerDetails.password}
-                onChange={(e) => handleChange(e, setFarmerDetails)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                name="confirmPassword"
-                value={farmerDetails.confirmPassword}
-                onChange={(e) => handleChange(e, setFarmerDetails)}
-                required
+                readOnly
               />
             </div>
           ) : (
