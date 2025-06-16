@@ -118,6 +118,14 @@ const App = () => {
             </PrivateRoute>
           }
         />
+        <Route 
+          path="/settings" 
+          element={
+            <PrivateRoute>
+              <Layout><SettingsPage /></Layout>
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
