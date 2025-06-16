@@ -19,6 +19,7 @@ import PrivateRoute from './Components/PrivateRoute';
 import AgrilendForm from './components/AgrilendForm';
 import RequestsScreen from './components/RequestsScreen';
 import Profile from './Pages/ProfilePage';
+import SettingsPage from './Pages/SettingsPage'; 
 
 const App = () => {
   return (
@@ -109,14 +110,22 @@ const App = () => {
             </PrivateRoute>
           } 
         />
-        <Route 
-  path="/profile" 
-  element={
-    <PrivateRoute>
-      <Layout><Profile /></Layout>
-    </PrivateRoute>
-  }
-/>
+                  <Route 
+            path="/profile" 
+            element={
+              <PrivateRoute>
+                <Layout><Profile /></Layout>
+              </PrivateRoute>
+            }
+          />
+              <Route 
+              path="/settings" 
+              element={
+                <PrivateRoute>
+                  <Layout><SettingsPage /></Layout>
+                </PrivateRoute>
+              } 
+            />
       </Routes>
     </Router>
   );

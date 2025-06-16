@@ -133,8 +133,7 @@
 }
 .banner-inner {
   display: flex;
-  justify-content: center;
-  align-items: center;
+ 
   gap: 10px;
 }
 .banner-icon {

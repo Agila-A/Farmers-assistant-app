@@ -1,0 +1,183 @@
+.settings-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.settings-box {
+  background-color: #fdfdfd;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.0rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+.settings-box.clickable {
+  background-color: #ffffff; /* white background */
+}
+.settings-box h3,
+.settings-box h4 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.settings-box.compact {
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1rem;
+  min-height: 50px;
+}
+
+.settings-box.compact h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #222;
+}
+
+.account-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 90%;
+  font-size: 14px;
+}
+
+.dropdown {
+  margin-top: 10px;
+  color: #94c372
+}
+
+.notification-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  
+}
+
+.notification-options label {
+  color: #353535;
+  font-weight: 500;
+}
+input[type="checkbox"] {
+  accent-color: #94c372;/* modern browsers support this */
+  width: 16px;
+  height: 16px;
+}
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 90%;
+  font-size: 14px;
+  background-color: #e6f4e6; /* light green */
+  color: #2e7d32; /* dark green text */
+  font-weight: 500;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.contact-buttons button {
+  padding: 8px 16px;
+  background-color: #e6f4e6;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #000;
+}
+
+.contact-buttons button:hover {
+  background-color: #94c372;
+}
+
+.toggle-heading {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.clickable {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  transition: background-color 0.2s;
+}
+
+.clickable:hover {
+  background-color: #f7f7f7;
+}
+
+.settings-box.clickable p {
+  font-size: 14px;
+  color: #a7a5a5;
+  margin-top: 4px;
+}
+
+/* Save button aligned to left */
+.save-button-container {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.save-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+  background-color: #388e3c;
+}
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 300px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.modal-content textarea {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+.settings-header {
+  width: 100%;
+  background-color: #d6f5d6;
+  padding: 1rem 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #2e7d32;
+  border-bottom: 2px solid #e0e0e0;
+}
