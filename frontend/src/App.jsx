@@ -17,7 +17,7 @@ import Payment from './Components/Payment';
 import PaymentConfirmed from './Components/PaymentConfirmed';
 import PrivateRoute from './Components/PrivateRoute';
 import AgrilendForm from './components/AgrilendForm';
-import RequestsScreen from './components/RequestsScreen';
+import RequestsScreen from './Components/RequestsScreen';
 import Profile from './Pages/ProfilePage';
 import SettingsPage from './Pages/SettingsPage'; 
 
@@ -110,22 +110,14 @@ const App = () => {
             </PrivateRoute>
           } 
         />
-                  <Route 
-            path="/profile" 
-            element={
-              <PrivateRoute>
-                <Layout><Profile /></Layout>
-              </PrivateRoute>
-            }
-          />
-              <Route 
-              path="/settings" 
-              element={
-                <PrivateRoute>
-                  <Layout><SettingsPage /></Layout>
-                </PrivateRoute>
-              } 
-            />
+        <Route 
+          path="/profile" 
+          element={
+            <PrivateRoute>
+              <Layout><Profile /></Layout>
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );

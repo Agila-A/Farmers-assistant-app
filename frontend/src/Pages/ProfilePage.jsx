@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db, auth } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import '../Styles/ProfilePage.css';
 
 const Profile = () => {
   const [user, loading] = useAuthState(auth);
@@ -24,19 +25,21 @@ const Profile = () => {
     if (!loading) fetchProfile();
   }, [user, loading]);
 
-  if (loading) return <div>Loading...</div>;
-  if (!user) return <div>Please log in to view your profile.</div>;
-  if (!profile) return <div>Fetching profile...</div>;
+  if (loading) return <div className="profile-container">Loading...</div>;
+  if (!user) return <div className="profile-container">Please log in to view your profile.</div>;
+  if (!profile) return <div className="profile-container">Fetching profile...</div>;
 
   return (
     <div className="profile-container">
-      <h2>👩‍🌾 Farmer Profile</h2>
-      <p><strong>Name:</strong> {profile.name}</p>
-      <p><strong>Email:</strong> {profile.email}</p>
-      <p><strong>Land Size:</strong> {profile.landSize} acres</p>
-      <p><strong>Location:</strong> {profile.location}</p>
-      <p><strong>Soil Type:</strong> {profile.soilType}</p>
-      <p><strong>Irrigation Type:</strong> {profile.irrigationType}</p>
+      <div className="profile-card">
+        <h2>👩‍🌾 Farmer Profile</h2>
+        <p><strong>Name:</strong> {profile.name}</p>
+        <p><strong>Email:</strong> {profile.email}</p>
+        <p><strong>Land Size:</strong> {profile.landSize} acres</p>
+        <p><strong>Location:</strong> {profile.location}</p>
+        <p><strong>Soil Type:</strong> {profile.soilType}</p>
+        <p><strong>Irrigation Type:</strong> {profile.irrigationType}</p>
+      </div>
     </div>
   );
 };
