@@ -173,11 +173,23 @@ select {
   justify-content: space-between;
 }
 .settings-header {
-  width: 100%;
-  background-color: #d6f5d6;
-  padding: 1rem 1rem;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  padding: 2.5rem 1rem;
   border-bottom: 2px solid #e0e0e0;
+  background-color: #d6f5d6;
+  margin-bottom: 20px;
+  border-radius: 0px;
 }
+
+.settings-logo-icon {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.settings-logo-title {
+  font-size: 2rem;
+  color: #2e7d32;
+  margin: 0;
+}
+

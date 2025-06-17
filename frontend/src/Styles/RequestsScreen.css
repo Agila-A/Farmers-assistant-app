@@ -11,9 +11,9 @@
 
 /* Top Bar */
 .topbar {
-  background-color: #eaf6da;
+  background-color: #d6f5d6;
   padding: 15px 25px;
-  border-radius: 10px;
+  border-radius: 0px;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
@@ -21,7 +21,7 @@
 }
 
 .title-text {
-  font-size: 28px;
+  font-size: 2 re;
   font-weight: bold;
   color: #2e7d32;
 }
@@ -50,20 +50,20 @@
 
 /* Header */
 .requests-header {
-  margin-bottom: 25px;
-  background-color: #eaf6da;
-  padding: 20px;
-  border-radius: 10px;
+  margin-bottom: 20px;
+  background-color: #d6f5d6;
+  padding: 10px;
+  border-radius: 0px;
 }
 
 .requests-header h2 {
-  font-size: 24px;
+  font-size: 25px;
   margin-bottom: 5px;
   color: #33691e;
 }
 
 .note-text {
-  font-size: 16px;
+  font-size: 14px;
   color: #4caf50;
 }
 
