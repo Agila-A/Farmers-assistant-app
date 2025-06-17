@@ -68,11 +68,17 @@ const AgriLendPage = () => {
 
   return (
     <div className="agrilend-container">
-      <div className="top-bar">
-        <div className="greeting">
-          <h1>🌿 AGRILEND</h1>
-        </div>
-      </div>
+      
+        <header className="agrilend-header">
+          <div className="logo">
+            <div className="logo-icon">
+              <span role="img" aria-label="leaf">🌿</span>
+            </div>
+            <h1>AGRILEND</h1>
+          </div>
+        </header>
+
+
 
       <main className="agrilend-main">
         <AnimatePresence mode="wait">

@@ -35,7 +35,11 @@ function TrackExpense() {
   return (
     <div className="container">
       <div className="main">
-        <div className="header">TRACK EXPENSE</div>
+        <div className="track-header">
+          <div className="track-logo-icon" role="img" aria-label="leaf">🌿</div>
+          <h1 className="track-logo-title">TRACK EXPENSE</h1>
+        </div>
+
 
         <div className="tabs">
           {['Today', 'Weekly', 'Monthly'].map((tab) => (
@@ -64,12 +68,12 @@ function TrackExpense() {
             </div>
           ))}
 
-          <div className="edit-btn">
-            <button>
-              <FaEdit />
-              Edit
-            </button>
-          </div>
+       <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+          <button className="modern-edit-btn">
+            <FaEdit style={{ marginRight: '6px' }} />
+            Edit
+          </button>
+        </div>
         </div>
       </div>
     </div>

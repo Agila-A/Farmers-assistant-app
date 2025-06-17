@@ -1,11 +1,29 @@
 /* Container styling */
-.agrilend-container {
+
+
+.agrilend-header {
   display: flex;
-  font-family: "Segoe UI", sans-serif;
-  height: 100vh;
-  background-color: #fdfefd;
-  
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 2px solid #e0e0e0;
+  background-color: #d6f5d6;
 }
+
+.agrilend-header .logo {
+  display: flex;
+  align-items: center;
+}
+
+.agrilend-header .logo-icon {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.agrilend-header h1 {
+  font-size: 2rem;
+  color: #2e7d32;
+}
+
 
 .top-bar .greeting h1 {
   font-size: 36px;
@@ -26,17 +44,7 @@
 }
 
 /* Header */
-.agrilend-header {
-  color: #2e7d32;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #d6f5d6;
-  border-radius: 2px;
-  padding: 10px;
-  margin-bottom: 2px;
-  display: flex;
-  
-}
+
 
 /* Banner */
 .agrilend-banner {

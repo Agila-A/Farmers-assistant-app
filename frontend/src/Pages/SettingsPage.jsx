@@ -5,8 +5,10 @@ const SettingsPage = () => {
   return (
     <div>
       <div className="settings-header">
-    <h1>🌿 SETTINGS</h1>
-  </div>
+          <div className="settings-logo-icon" role="img" aria-label="leaf">🌿</div>
+          <h1 className="settings-logo-title">SETTINGS</h1>
+      </div>
+
       <Settings />
     </div>
   );

@@ -60,15 +60,22 @@
   color: #F1F1F1;
 }
 
-.cta-buttons .cta-button, .learn-more {
-  background-color: #4CAF50;
+.cta-buttons .cta-button,
+.learn-more {
+  background-color: #369839;
   color: white;
-  padding: 10px 20px;
+  padding: 15px 24px; /* reduce width */
   margin: 0 10px;
   border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
+  white-space: nowrap; /* prevents stretching due to wrapping */
 }
 
+.cta-buttons .cta-button{
+  width: 150px;
+}
 .learn-more {
   background-color: transparent;
   border: 2px solid white;

@@ -15,8 +15,17 @@ function BudgetTracker() {
 
   return (
     <div className="budget-container">
-      <h1 className="budget-header">BUDGET TRACKER</h1>
-      <h2 className="budget-subheader">EXPENSES</h2>
+      <div className="budget-header">
+        <div className="budget-logo">
+          <div className="budget-logo-icon">
+            <span role="img" aria-label="leaf">🌿</span>
+          </div>
+          <h1 className="budget-logo-title">BUDGET TRACKER</h1>
+        </div>
+      </div>
+
+      
+
 
       <div className="chart">
         {expenses.map((value, index) => {

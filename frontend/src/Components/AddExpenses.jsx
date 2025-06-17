@@ -24,7 +24,11 @@ const AddExpenses = () => {
 
   return (
     <div className="add-expense-page">
-      <h1 className="form-title">Add Expense</h1>
+      <div className="addexpense-header">
+        <div className="addexpense-logo-icon" role="img" aria-label="leaf">🌿</div>
+        <h1 className="addexpense-logo-title">ADD EXPENSE</h1>
+      </div>
+
       <form className="expense-form">
         <div className="form-row">
           <div className="form-group">
