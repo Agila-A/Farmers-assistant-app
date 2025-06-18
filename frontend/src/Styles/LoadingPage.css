@@ -1,0 +1,24 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #e6fffa, #f0fff4);
+}
+
+.spinner-ring {
+  width: 80px;
+  height: 80px;
+  border: 10px solid #c6f6d5;
+  border-top: 10px solid #38a169;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.loading-container p {
+  font-size: 1.2rem;
+  color: #276749;
+  font-weight: 500;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
