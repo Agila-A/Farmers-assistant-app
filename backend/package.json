@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Backend server for Farmers Assistant App",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
@@ -12,7 +11,7 @@
   "author": "Your Name",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.5.0",
+    "dotenv": "^16.6.1",
     "express": "^5.1.0",
     "mysql2": "^3.14.1",
     "sequelize": "^6.37.7"
@@ -21,4 +20,3 @@
     "nodemon": "^3.1.10"
   }
 }
-
