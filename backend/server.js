@@ -1,20 +1,29 @@
 const express = require('express');
 require('dotenv').config();
 const sequelize = require('./models');
-const Task = require('./models/task.model');
+const taskRoutes = require('./routes/task.routes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(express.json());
+
+// 🔌 Route registration
+app.use('/api/tasks', taskRoutes);
+
+// 🔧 Optional: Test route (API Health Check)
 app.get('/', (req, res) => {
-  res.send('API Running...');
+  res.send('🚀 API is up and running!');
 });
 
+// 🗄️ Connect to Sequelize and start the server
 sequelize.sync()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`🚀 Server is running on http://localhost:${PORT}`);
     });
-    console.log('🗄️  All models were synchronized successfully.');
+    console.log('✅ All models synchronized with the database.');
   })
-  .catch(err => console.error('❌ Error syncing models:', err));
+  .catch(err => {
+    console.error('❌ Failed to sync models:', err);
+  });
