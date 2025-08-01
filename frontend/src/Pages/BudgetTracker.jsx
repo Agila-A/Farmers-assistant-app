@@ -1,9 +1,10 @@
+// BudgetTracker.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/BudgetTracker.css';
 
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-const expenses = [80, 30, 45, 75, 20, 28, 90, 55, 10, 25, 70, 50];
+const expenses = [100, 30, 45, 75, 20, 28, 90, 55, 10, 25, 70, 50];
 
 function BudgetTracker() {
   const navigate = useNavigate();
@@ -24,13 +25,9 @@ function BudgetTracker() {
         </div>
       </div>
 
-      
-
-
       <div className="chart">
         {expenses.map((value, index) => {
-          const height = (value / maxExpense) * 200;
-
+          const height = (value / maxExpense) * 180; // scale to max height of 180px
           return (
             <div key={index} className="bar-container">
               <div className="bar" style={{ height: `${height}px` }}></div>
@@ -43,10 +40,7 @@ function BudgetTracker() {
       <div className="actions">
         <div className="action-card">
           <div className="icon">➕</div>
-          <button
-            className="action-button"
-            onClick={() => navigate('/add-expenses')}
-          >
+          <button className="action-button" onClick={() => navigate('/add-expenses')}>
             Add Expenses
           </button>
         </div>
