@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { agrilendEquipmentAPI } from '../services/agrilendAPI';
 import "../styles/AgriLendForm.css";
 
 const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
   const [form, setForm] = useState({
     name: '', equipment: '', price: '', delivery: true, location: '', from: '', to: '', contact: '', agree: false, image: null,
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,17 +25,86 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
 
   const handleDeliveryChange = (value) => setForm(prev => ({ ...prev, delivery: value }));
 
-  const handleSubmit = (e) => {
+  // Upload image to server
+  const uploadImage = async (imageFile) => {
+    const formData = new FormData();
+    formData.append('image', imageFile);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/upload/image', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to upload image');
+      }
+
+      // Convert relative URL to full backend URL
+      const imageUrl = `http://localhost:5000${data.data.url}`;
+      return imageUrl;
+    } catch (error) {
+      console.error('Image upload error:', error);
+      throw new Error('Failed to upload image. Please try again.');
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newEquipment = {
-      id: Date.now(),
-      name: form.equipment,
-      price: `₹ ${form.price}`,
-      owner: form.name,
-      image: form.image ? URL.createObjectURL(form.image) : null
-    };
-    onSubmitSuccess(newEquipment);
-    alert('Equipment listed successfully!');
+    setIsSubmitting(true);
+
+    try {
+      // Upload image if provided
+      let imageUrl = '/assets/tractor.png'; // Default fallback image
+      
+      if (form.image) {
+        try {
+          imageUrl = await uploadImage(form.image);
+        } catch (uploadError) {
+          console.error('Image upload failed:', uploadError);
+          alert('Image upload failed. Equipment will be listed with default image.');
+        }
+      }
+      
+      // Prepare equipment data for backend
+      const equipmentData = {
+        name: form.equipment,
+        description: `Equipment available from ${form.from} to ${form.to}`,
+        price: parseFloat(form.price),
+        ownerId: 1, // For now, using a default owner ID. In real app, this would come from user session
+        ownerName: form.name,
+        location: form.location,
+        imageUrl: imageUrl, // Use uploaded image URL or default
+        isOnSale: false,
+        deliveryAvailable: form.delivery,
+        deliveryCharge: form.delivery ? 200 : 0, // Default delivery charge
+        category: 'OTHER', // Default category
+        condition: 'GOOD' // Default condition
+      };
+
+      // Send to backend
+      const response = await agrilendEquipmentAPI.create(equipmentData);
+      
+      // Create local equipment object for immediate display
+      const newEquipment = {
+        id: response.data.id,
+        name: form.equipment,
+        price: `₹ ${form.price}`,
+        owner: form.name,
+        location: form.location,
+        image: imageUrl // Use the uploaded image URL
+      };
+
+      onSubmitSuccess(newEquipment);
+      alert('Equipment listed successfully!');
+    } catch (error) {
+      console.error('Error creating equipment:', error);
+      alert('Failed to list equipment. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleRequestClick = () => {
@@ -64,10 +135,11 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
           <div className="input-group">
             <input type="text" name="price" placeholder="Rental price" value={form.price} onChange={handleChange} required />
             <div className="upload-image">
-              <label className="upload-label">+
+              <label className="upload-label">
+                {form.image ? '📷 Image Selected' : '+'}
                 <input type="file" name="image" accept="image/*" onChange={handleChange} hidden />
               </label>
-              <span>Click here</span>
+              <span>{form.image ? form.image.name : 'Click to upload equipment photo'}</span>
             </div>
           </div>
 
@@ -96,8 +168,10 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
           </label>
 
           <div className="form-buttons">
-            <button type="submit" className="submit-button">Submit</button>
-            <button type="button" className="cancel-button" onClick={onBack}>Cancel</button>
+            <button type="submit" className="submit-button" disabled={isSubmitting}>
+              {isSubmitting ? 'Submitting...' : 'Submit'}
+            </button>
+            <button type="button" className="cancel-button" onClick={onBack} disabled={isSubmitting}>Cancel</button>
           </div>
         </form>
       </div>
