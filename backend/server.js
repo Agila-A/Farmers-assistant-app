@@ -1,55 +1,45 @@
+
 const express = require('express');
-require('dotenv').config();
-const sequelize = require('./models');
-const taskRoutes = require('./routes/task.routes');
+const cors = require('cors');
+const budgetRoutes = require('./routes/budgetTracker.routes');
+const userRoutes = require('./routes/user.routes');
 const equipmentRoutes = require('./routes/equipment.routes');
 const rentalRequestRoutes = require('./routes/rental-request.routes');
-const userRoutes = require('./routes/user.routes');
+const taskRoutes = require('./routes/task.routes');
 const uploadRoutes = require('./routes/upload.routes');
-
-// Import associations to establish model relationships
-require('./models/associations');
-
-
+const expenseRoutes = require('./routes/expense.routes');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+require('dotenv').config();
 
-// Enable CORS
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  if (req.method === 'OPTIONS') {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
+const db = require('./config/database');
+app.use(cors());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-app.use(express.json());
-
-// 🔌 Route registration
-app.use('/api/tasks', taskRoutes);
+// Routes
+app.use('/api/budget', budgetRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/equipment', equipmentRoutes);
 app.use('/api/rental-requests', rentalRequestRoutes);
-app.use('/api/users', userRoutes);
+app.use('/api/tasks', taskRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/expenses', expenseRoutes);
 
-// 🔧 Optional: Test route (API Health Check)
 app.get('/', (req, res) => {
-  res.send('🚀 API is up and running!');
+  res.send('API Running...');
 });
 
-// 🗄️ Connect to Sequelize and start the server
-sequelize.sync()
-  .then(() => {
-    console.log('✅ All models synchronized with the database.');
-    
-    app.listen(PORT, () => {
-      console.log(`🚀 Server is running on http://localhost:${PORT}`);
-    });
-  })
-  .catch(err => {
-    console.error('❌ Failed to sync models:', err);
+const PORT = process.env.PORT || 5000;
+db.connect((err) => {
+  if (err) {
+    console.error('❌ Database connection failed:', err);
+    process.exit(1);
+  }
+  
+  console.log('✅ Database connected successfully!');
+  
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
   });
+});
