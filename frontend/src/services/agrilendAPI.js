@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://192.168.29.205:5000/api';
 
 // Generic API request function for AgriLend
 const agrilendApiRequest = async (endpoint, options = {}) => {
