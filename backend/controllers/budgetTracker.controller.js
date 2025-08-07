@@ -1,4 +1,16 @@
-const Budget = require("../models/budgetTracker.model");
+
+require('dotenv').config(); // <-- Add this at the very top
+
+const mysql = require('mysql2');
+
+// Create a MySQL connection pool using environment variables
+const db = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
+});const Budget = require("../models/budgetTracker.model");
 
 exports.addExpense = (req, res) => {
   const data = {
@@ -7,14 +19,20 @@ exports.addExpense = (req, res) => {
   };
 
   Budget.create(data, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Add Expense Error:', err); // Log the error
+      return res.status(500).json({ error: err.message });
+    }
     res.status(201).json({ message: "Expense added", data: results });
   });
 };
 
 exports.getAllExpenses = (req, res) => {
   Budget.getAll((err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get All Expenses Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 };
@@ -22,7 +40,10 @@ exports.getAllExpenses = (req, res) => {
 exports.getTodayExpenses = (req, res) => {
   const today = new Date().toISOString().split("T")[0];
   Budget.getByDate(today, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get Today Expenses Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 };
@@ -33,7 +54,10 @@ exports.getWeeklyExpenses = (req, res) => {
   const start = new Date(today.setDate(today.getDate() - 6)).toISOString().split("T")[0];
 
   Budget.getByWeek(start, end, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get Weekly Expenses Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 };
@@ -44,7 +68,10 @@ exports.getMonthlyExpenses = (req, res) => {
   const month = today.getMonth() + 1;
 
   Budget.getByMonth(year, month, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get Monthly Expenses Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 };
@@ -52,7 +79,10 @@ exports.getMonthlyExpenses = (req, res) => {
 exports.getExpensesByDate = (req, res) => {
   const { date } = req.params;
   Budget.getByDate(date, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get Expenses By Date Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 };
@@ -60,7 +90,10 @@ exports.getExpensesByDate = (req, res) => {
 exports.getExpensesByWeek = (req, res) => {
   const { startDate, endDate } = req.params;
   Budget.getByWeek(startDate, endDate, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get Expenses By Week Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 };
@@ -68,7 +101,10 @@ exports.getExpensesByWeek = (req, res) => {
 exports.getExpensesByMonth = (req, res) => {
   const { year, month } = req.params;
   Budget.getByMonth(year, month, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get Expenses By Month Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 };
@@ -76,7 +112,10 @@ exports.getExpensesByMonth = (req, res) => {
 exports.getExpensesByCategory = (req, res) => {
   const { category } = req.params;
   Budget.getByCategory(category, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get Expenses By Category Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 };
@@ -84,7 +123,10 @@ exports.getExpensesByCategory = (req, res) => {
 exports.updateExpense = (req, res) => {
   const { id } = req.params;
   Budget.update(id, req.body, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Update Expense Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json({ message: "Expense updated", data: results });
   });
 };
@@ -92,21 +134,30 @@ exports.updateExpense = (req, res) => {
 exports.deleteExpense = (req, res) => {
   const { id } = req.params;
   Budget.delete(id, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Delete Expense Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json({ message: "Expense deleted", data: results });
   });
 };
 
 exports.getTotalAmount = (req, res) => {
   Budget.getTotalAmount((err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get Total Amount Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results[0]);
   });
 };
 
 exports.getTotalByCategory = (req, res) => {
   Budget.getTotalByCategory((err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Get Total By Category Error:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 };
