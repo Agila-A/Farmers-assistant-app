@@ -1,4 +1,13 @@
-const db = require('../config/database');
+const mysql = require('mysql2');
+
+// Create a MySQL connection pool using environment variables
+const db = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
+});
 
 // Create Expense
 exports.create = (data, callback) => {
