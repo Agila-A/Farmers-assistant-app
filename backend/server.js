@@ -8,6 +8,7 @@ const rentalRequestRoutes = require('./routes/rental-request.routes');
 const taskRoutes = require('./routes/task.routes');
 const uploadRoutes = require('./routes/upload.routes');
 const expenseRoutes = require('./routes/expense.routes');
+const BudgetTracker = require('./routes/budgetTracker.routes');
 
 const app = express();
 require('dotenv').config();

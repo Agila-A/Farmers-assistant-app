@@ -1,164 +1,185 @@
+const Budget = require("../models/budgetTracker.model");
+const { Op } = require("sequelize");
 
-require('dotenv').config(); // <-- Add this at the very top
+// ✅ Add Expense
+exports.addExpense = async (req, res) => {
+  try {
+    const { title, description, category, amount, date } = req.body;
 
-const mysql = require('mysql2');
-
-// Create a MySQL connection pool using environment variables
-const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT
-});const Budget = require("../models/budgetTracker.model");
-
-exports.addExpense = (req, res) => {
-  const data = {
-    ...req.body,
-    receipt_url: req.file ? req.file.filename : null,
-  };
-
-  Budget.create(data, (err, results) => {
-    if (err) {
-      console.error('Add Expense Error:', err); // Log the error
-      return res.status(500).json({ error: err.message });
+    if (!title || !category || !amount || !date) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide title, category, amount, and date"
+      });
     }
-    res.status(201).json({ message: "Expense added", data: results });
-  });
+
+    const newExpense = await Budget.create({
+      title,
+      description,
+      category,
+      amount,
+      date
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "Expense added successfully",
+      data: newExpense
+    });
+  } catch (error) {
+    console.error("Error adding expense:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to save expense",
+      error: error.message
+    });
+  }
 };
 
-exports.getAllExpenses = (req, res) => {
-  Budget.getAll((err, results) => {
-    if (err) {
-      console.error('Get All Expenses Error:', err);
-      return res.status(500).json({ error: err.message });
+// ✅ Get All Expenses (with filters)
+exports.getAllExpenses = async (req, res) => {
+  try {
+    const { search, category, startDate, endDate, minAmount, maxAmount } = req.query;
+    let whereClause = {};
+
+    if (search) {
+      whereClause.description = { [Op.like]: `%${search}%` };
     }
-    res.json(results);
-  });
+
+    if (category) {
+      whereClause.category = category;
+    }
+
+    if (startDate || endDate) {
+      whereClause.date = {};
+      if (startDate) whereClause.date[Op.gte] = startDate;
+      if (endDate) whereClause.date[Op.lte] = endDate;
+    }
+
+    if (minAmount || maxAmount) {
+      whereClause.amount = {};
+      if (minAmount) whereClause.amount[Op.gte] = parseFloat(minAmount);
+      if (maxAmount) whereClause.amount[Op.lte] = parseFloat(maxAmount);
+    }
+
+    const expenses = await Budget.findAll({
+      where: whereClause,
+      order: [["date", "DESC"]]
+    });
+
+    res.json({
+      success: true,
+      data: expenses,
+      count: expenses.length
+    });
+  } catch (error) {
+    console.error("Error fetching expenses:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch expenses",
+      error: error.message
+    });
+  }
 };
 
+// ✅ Update Expense
+exports.updateExpense = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description, category, amount, date } = req.body;
+
+    const expense = await Budget.findByPk(id);
+    if (!expense) {
+      return res.status(404).json({
+        success: false,
+        message: "Expense not found"
+      });
+    }
+
+    await expense.update({
+      title,
+      description,
+      category,
+      amount,
+      date
+    });
+
+    res.json({
+      success: true,
+      message: "Expense updated successfully",
+      data: expense
+    });
+  } catch (error) {
+    console.error("Error updating expense:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update expense",
+      error: error.message
+    });
+  }
+};
+
+// ✅ Delete Expense
+exports.deleteExpense = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const expense = await Budget.findByPk(id);
+
+    if (!expense) {
+      return res.status(404).json({
+        success: false,
+        message: "Expense not found"
+      });
+    }
+
+    await expense.destroy();
+    res.json({
+      success: true,
+      message: "Expense deleted successfully"
+    });
+  } catch (error) {
+    console.error("Error deleting expense:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete expense",
+      error: error.message
+    });
+  }
+};
+
+// 📌 Placeholder Controllers for unimplemented routes
 exports.getTodayExpenses = (req, res) => {
-  const today = new Date().toISOString().split("T")[0];
-  Budget.getByDate(today, (err, results) => {
-    if (err) {
-      console.error('Get Today Expenses Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results);
-  });
+  res.json({ success: true, message: "getTodayExpenses not implemented yet" });
 };
 
 exports.getWeeklyExpenses = (req, res) => {
-  const today = new Date();
-  const end = today.toISOString().split("T")[0];
-  const start = new Date(today.setDate(today.getDate() - 6)).toISOString().split("T")[0];
-
-  Budget.getByWeek(start, end, (err, results) => {
-    if (err) {
-      console.error('Get Weekly Expenses Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results);
-  });
+  res.json({ success: true, message: "getWeeklyExpenses not implemented yet" });
 };
 
 exports.getMonthlyExpenses = (req, res) => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-
-  Budget.getByMonth(year, month, (err, results) => {
-    if (err) {
-      console.error('Get Monthly Expenses Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results);
-  });
+  res.json({ success: true, message: "getMonthlyExpenses not implemented yet" });
 };
 
 exports.getExpensesByDate = (req, res) => {
-  const { date } = req.params;
-  Budget.getByDate(date, (err, results) => {
-    if (err) {
-      console.error('Get Expenses By Date Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results);
-  });
+  res.json({ success: true, message: "getExpensesByDate not implemented yet" });
 };
 
 exports.getExpensesByWeek = (req, res) => {
-  const { startDate, endDate } = req.params;
-  Budget.getByWeek(startDate, endDate, (err, results) => {
-    if (err) {
-      console.error('Get Expenses By Week Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results);
-  });
+  res.json({ success: true, message: "getExpensesByWeek not implemented yet" });
 };
 
 exports.getExpensesByMonth = (req, res) => {
-  const { year, month } = req.params;
-  Budget.getByMonth(year, month, (err, results) => {
-    if (err) {
-      console.error('Get Expenses By Month Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results);
-  });
+  res.json({ success: true, message: "getExpensesByMonth not implemented yet" });
 };
 
 exports.getExpensesByCategory = (req, res) => {
-  const { category } = req.params;
-  Budget.getByCategory(category, (err, results) => {
-    if (err) {
-      console.error('Get Expenses By Category Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results);
-  });
-};
-
-exports.updateExpense = (req, res) => {
-  const { id } = req.params;
-  Budget.update(id, req.body, (err, results) => {
-    if (err) {
-      console.error('Update Expense Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json({ message: "Expense updated", data: results });
-  });
-};
-
-exports.deleteExpense = (req, res) => {
-  const { id } = req.params;
-  Budget.delete(id, (err, results) => {
-    if (err) {
-      console.error('Delete Expense Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json({ message: "Expense deleted", data: results });
-  });
+  res.json({ success: true, message: "getExpensesByCategory not implemented yet" });
 };
 
 exports.getTotalAmount = (req, res) => {
-  Budget.getTotalAmount((err, results) => {
-    if (err) {
-      console.error('Get Total Amount Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results[0]);
-  });
+  res.json({ success: true, message: "getTotalAmount not implemented yet" });
 };
 
 exports.getTotalByCategory = (req, res) => {
-  Budget.getTotalByCategory((err, results) => {
-    if (err) {
-      console.error('Get Total By Category Error:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results);
-  });
+  res.json({ success: true, message: "getTotalByCategory not implemented yet" });
 };
-
