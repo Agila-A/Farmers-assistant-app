@@ -58,7 +58,7 @@ const Dashboard = () => {
         </div>
 
         <div className="dashboard-bottom">
-          <div className="card chat" onClick={() => navigate('/chatbot')} style={{ cursor: 'pointer' }}>
+          <div className="card chat" onClick={() => navigate('/chat')} style={{ cursor: 'pointer' }}>
             <img src={chatIcon} alt="Let's Chat" />
             <h4>LET'S CHAT</h4>
           </div>
