@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { agrilendEquipmentAPI } from '../services/agrilendAPI';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from '../firebase';
+import { agrilendEquipmentAPI } from '../utils/api';
+
 import "../styles/AgriLendForm.css";
 
 const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
@@ -8,6 +11,7 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
     name: '', equipment: '', price: '', delivery: true, location: '', from: '', to: '', contact: '', agree: false, image: null,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [user, loading, error] = useAuthState(auth);
 
   const navigate = useNavigate();
 
@@ -55,6 +59,13 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Check if user is authenticated
+    if (!user) {
+      alert('You must be logged in to list equipment.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       // Upload image if provided
       let imageUrl = '/assets/tractor.png'; // Default fallback image
@@ -73,13 +84,15 @@ const AgrilendForm = ({ onBack, onSubmitSuccess }) => {
         name: form.equipment,
         description: `Equipment available from ${form.from} to ${form.to}`,
         price: parseFloat(form.price),
-        ownerId: 1, // For now, using a default owner ID. In real app, this would come from user session
+        ownerId: user ? user.uid : null, // Send Firebase UID to backend
         ownerName: form.name,
         location: form.location,
         imageUrl: imageUrl, // Use uploaded image URL or default
         isOnSale: false,
         deliveryAvailable: form.delivery,
         deliveryCharge: form.delivery ? 200 : 0, // Default delivery charge
+        availableFrom: form.from, // Send availability dates
+        availableTo: form.to, // Send availability dates
         category: 'OTHER', // Default category
         condition: 'GOOD' // Default condition
       };
