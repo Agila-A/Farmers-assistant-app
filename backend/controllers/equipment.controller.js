@@ -1,47 +1,58 @@
 const Equipment = require('../models/equipment.model');
 const User = require('../models/user.model');
+const { getOrCreateUser } = require('../utils/userMapping');
 const { Op } = require('sequelize');
 
-// Get all available equipment
+const createEquipment = async (req, res) => {
+  try {
+    const { name, price, ownerId, ownerName, location, imageUrl, description, deliveryAvailable, deliveryCharge, category, condition, availableFrom, availableTo } = req.body;
+
+    if (!name || !price || !ownerId || !ownerName || !location) {
+      return res.status(400).json({ success: false, message: 'Missing required fields.' });
+    }
+
+    // Get or create user based on Firebase UID
+    const user = await getOrCreateUser(ownerId, ownerName);
+    
+    const newEquipment = await Equipment.create({
+      name,
+      description,
+      price: parseFloat(price),
+      ownerId: user.id, // Use database user ID
+      ownerName,
+      location,
+      imageUrl,
+      isAvailable: true,
+      deliveryAvailable: deliveryAvailable !== undefined ? deliveryAvailable : true,
+      deliveryCharge: deliveryCharge ? parseFloat(deliveryCharge) : 0,
+      availableFrom: availableFrom ? new Date(availableFrom) : null,
+      availableTo: availableTo ? new Date(availableTo) : null,
+      category,
+      condition
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'Equipment listed successfully',
+      data: newEquipment
+    });
+  } catch (error) {
+    console.error('Error creating equipment:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to create equipment listing',
+      error: error.message
+    });
+  }
+};
+
 const getAllEquipment = async (req, res) => {
   try {
-    const { search, category, location, minPrice, maxPrice } = req.query;
-    
-    let whereClause = {
-      isAvailable: true
-    };
-
-    // Search by name or description
-    if (search) {
-      whereClause[Op.or] = [
-        { name: { [Op.like]: `%${search}%` } },
-        { description: { [Op.like]: `%${search}%` } }
-      ];
-    }
-
-    // Filter by category
-    if (category) {
-      whereClause.category = category;
-    }
-
-    // Filter by location
-    if (location) {
-      whereClause.location = { [Op.like]: `%${location}%` };
-    }
-
-    // Filter by price range
-    if (minPrice || maxPrice) {
-      whereClause.price = {};
-      if (minPrice) whereClause.price[Op.gte] = parseFloat(minPrice);
-      if (maxPrice) whereClause.price[Op.lte] = parseFloat(maxPrice);
-    }
-
     const equipment = await Equipment.findAll({
-      where: whereClause,
       include: [{
         model: User,
         as: 'owner',
-        attributes: ['id', 'name', 'rating', 'totalLends']
+        attributes: ['id', 'name']
       }],
       order: [['createdAt', 'DESC']]
     });
@@ -65,12 +76,11 @@ const getAllEquipment = async (req, res) => {
 const getEquipmentById = async (req, res) => {
   try {
     const { id } = req.params;
-    
     const equipment = await Equipment.findByPk(id, {
       include: [{
         model: User,
         as: 'owner',
-        attributes: ['id', 'name', 'rating', 'totalLends', 'phone', 'location']
+        attributes: ['id', 'name']
       }]
     });
 
@@ -95,70 +105,13 @@ const getEquipmentById = async (req, res) => {
   }
 };
 
-// Create new equipment listing
-const createEquipment = async (req, res) => {
-  try {
-    const {
-      name,
-      description,
-      price,
-      ownerId,
-      ownerName,
-      location,
-      imageUrl,
-      isOnSale,
-      deliveryAvailable,
-      deliveryCharge,
-      category,
-      condition
-    } = req.body;
-
-    // Validate required fields
-    if (!name || !price || !ownerId || !ownerName || !location) {
-      return res.status(400).json({
-        success: false,
-        message: 'Missing required fields'
-      });
-    }
-
-    const equipment = await Equipment.create({
-      name,
-      description,
-      price: parseFloat(price),
-      ownerId,
-      ownerName,
-      location,
-      imageUrl,
-      isOnSale: isOnSale || false,
-      deliveryAvailable: deliveryAvailable !== undefined ? deliveryAvailable : true,
-      deliveryCharge: deliveryCharge ? parseFloat(deliveryCharge) : 0,
-      category: category || 'OTHER',
-      condition: condition || 'GOOD'
-    });
-
-    res.status(201).json({
-      success: true,
-      message: 'Equipment listed successfully',
-      data: equipment
-    });
-  } catch (error) {
-    console.error('Error creating equipment:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to create equipment listing',
-      error: error.message
-    });
-  }
-};
-
-// Update equipment listing
+// Update equipment
 const updateEquipment = async (req, res) => {
   try {
     const { id } = req.params;
-    const updateData = req.body;
+    const { name, price, ownerId, ownerName, location, imageUrl, description, deliveryAvailable, deliveryCharge, category, condition, availableFrom, availableTo } = req.body;
 
     const equipment = await Equipment.findByPk(id);
-    
     if (!equipment) {
       return res.status(404).json({
         success: false,
@@ -166,20 +119,34 @@ const updateEquipment = async (req, res) => {
       });
     }
 
-    // Only owner can update equipment
-    if (equipment.ownerId !== parseInt(req.body.ownerId)) {
-      return res.status(403).json({
-        success: false,
-        message: 'Unauthorized to update this equipment'
-      });
+    // If ownerId (Firebase UID) is provided, get or create the user
+    let databaseUserId = equipment.ownerId;
+    if (ownerId) {
+      const user = await getOrCreateUser(ownerId, ownerName);
+      databaseUserId = user.id;
     }
 
-    await equipment.update(updateData);
+    const updatedEquipment = await equipment.update({
+      name: name || equipment.name,
+      description: description || equipment.description,
+      price: price ? parseFloat(price) : equipment.price,
+      ownerId: databaseUserId,
+      ownerName: ownerName || equipment.ownerName,
+      location: location || equipment.location,
+      imageUrl: imageUrl || equipment.imageUrl,
+      isAvailable: equipment.isAvailable,
+      deliveryAvailable: deliveryAvailable !== undefined ? deliveryAvailable : equipment.deliveryAvailable,
+      deliveryCharge: deliveryCharge ? parseFloat(deliveryCharge) : equipment.deliveryCharge,
+      availableFrom: availableFrom ? new Date(availableFrom) : equipment.availableFrom,
+      availableTo: availableTo ? new Date(availableTo) : equipment.availableTo,
+      category: category || equipment.category,
+      condition: condition || equipment.condition
+    });
 
     res.json({
       success: true,
       message: 'Equipment updated successfully',
-      data: equipment
+      data: updatedEquipment
     });
   } catch (error) {
     console.error('Error updating equipment:', error);
@@ -191,26 +158,16 @@ const updateEquipment = async (req, res) => {
   }
 };
 
-// Delete equipment listing
+// Delete equipment
 const deleteEquipment = async (req, res) => {
   try {
     const { id } = req.params;
-    const { ownerId } = req.body;
-
     const equipment = await Equipment.findByPk(id);
-    
+
     if (!equipment) {
       return res.status(404).json({
         success: false,
         message: 'Equipment not found'
-      });
-    }
-
-    // Only owner can delete equipment
-    if (equipment.ownerId !== parseInt(ownerId)) {
-      return res.status(403).json({
-        success: false,
-        message: 'Unauthorized to delete this equipment'
       });
     }
 
@@ -230,36 +187,10 @@ const deleteEquipment = async (req, res) => {
   }
 };
 
-// Get equipment by owner
-const getEquipmentByOwner = async (req, res) => {
-  try {
-    const { ownerId } = req.params;
-
-    const equipment = await Equipment.findAll({
-      where: { ownerId },
-      order: [['createdAt', 'DESC']]
-    });
-
-    res.json({
-      success: true,
-      data: equipment,
-      count: equipment.length
-    });
-  } catch (error) {
-    console.error('Error fetching owner equipment:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch equipment',
-      error: error.message
-    });
-  }
-};
-
 module.exports = {
+  createEquipment,
   getAllEquipment,
   getEquipmentById,
-  createEquipment,
   updateEquipment,
-  deleteEquipment,
-  getEquipmentByOwner
-}; 
+  deleteEquipment
+};

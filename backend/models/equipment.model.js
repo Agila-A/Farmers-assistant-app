@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
+const User = require('./user.model');
 
 const Equipment = sequelize.define('Equipment', {
   id: {
@@ -10,24 +11,21 @@ const Equipment = sequelize.define('Equipment', {
   name: {
     type: DataTypes.STRING(100),
     allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   },
   description: {
     type: DataTypes.TEXT,
-    allowNull: true
   },
   price: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
-    validate: {
-      min: 0
-    }
   },
   ownerId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    references: {
+      model: User,
+      key: 'id'
+    }
   },
   ownerName: {
     type: DataTypes.STRING(100),
@@ -41,10 +39,6 @@ const Equipment = sequelize.define('Equipment', {
     type: DataTypes.STRING(500),
     allowNull: true
   },
-  isOnSale: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
-  },
   isAvailable: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
@@ -57,6 +51,14 @@ const Equipment = sequelize.define('Equipment', {
     type: DataTypes.DECIMAL(10, 2),
     defaultValue: 0
   },
+  availableFrom: {
+    type: DataTypes.DATE,
+    allowNull: true
+  },
+  availableTo: {
+    type: DataTypes.DATE,
+    allowNull: true
+  },
   category: {
     type: DataTypes.ENUM('TRACTOR', 'TOOL', 'MANURE', 'CONVEYOR', 'OTHER'),
     defaultValue: 'OTHER'
@@ -65,17 +67,12 @@ const Equipment = sequelize.define('Equipment', {
     type: DataTypes.ENUM('EXCELLENT', 'GOOD', 'FAIR', 'POOR'),
     defaultValue: 'GOOD'
   },
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
-  }
 }, {
   tableName: 'equipment',
   timestamps: true
 });
 
-module.exports = Equipment; 
+Equipment.belongsTo(User, { foreignKey: 'ownerId', as: 'owner' });
+User.hasMany(Equipment, { foreignKey: 'ownerId', as: 'equipmentListings' });
+
+module.exports = Equipment;

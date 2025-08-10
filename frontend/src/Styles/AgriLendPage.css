@@ -135,6 +135,21 @@
   margin-top: 5px;
 }
 
+.delete-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
 /* Equipment Detail Overlay */
 .equipment-detail-overlay {
   position: fixed;

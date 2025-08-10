@@ -2,8 +2,18 @@
 import React from 'react';
 import '../styles/AgriLendPage.css';
 
-export const EquipmentDetail = ({ equipment, onBack, onRequest }) => {
+export const EquipmentDetail = ({ equipment, onBack, onRequest, currentUser, onDelete }) => {
   if (!equipment) return null;
+  
+  // Compare the current user's display name with the equipment owner's name
+  const isOwner = currentUser && equipment.owner === currentUser.displayName;
+  
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this equipment listing?')) {
+      onDelete(equipment.id);
+      onBack(); // Close the detail view after deletion
+    }
+  };
 
   return (
     
@@ -31,9 +41,15 @@ export const EquipmentDetail = ({ equipment, onBack, onRequest }) => {
         <p><strong>Name:</strong> {equipment.owner}</p>
       </div>
 
-      <button className="cta-button" onClick={onRequest}>
-        Request
-      </button>
+      {isOwner ? (
+        <button className="cta-button" onClick={handleDelete} style={{ backgroundColor: '#f44336' }}>
+          Delete Equipment
+        </button>
+      ) : (
+        <button className="cta-button" onClick={onRequest}>
+          Request
+        </button>
+      )}
     </div>
   );
 };
