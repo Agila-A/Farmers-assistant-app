@@ -16,10 +16,11 @@ import Demo from './Pages/Demo';
 import Payment from './Components/Payment';
 import PaymentConfirmed from './Components/PaymentConfirmed';
 import PrivateRoute from './Components/PrivateRoute';
-import AgrilendForm from './components/AgrilendForm';
+import AgrilendForm from './Components/AgrilendForm';
 import RequestsScreen from './Components/RequestsScreen';
 import Profile from './Pages/ProfilePage';
 import SettingsPage from './Pages/SettingsPage'; 
+import ChatPage from './Pages/ChatPage';
 
 const App = () => {
   return (
@@ -125,6 +126,14 @@ const App = () => {
               <Layout><SettingsPage /></Layout>
             </PrivateRoute>
           }
+        />
+        <Route 
+          path="/chat" 
+          element={
+            <PrivateRoute>
+              <Layout><ChatPage /></Layout>
+            </PrivateRoute>
+          } 
         />
       </Routes>
     </Router>
