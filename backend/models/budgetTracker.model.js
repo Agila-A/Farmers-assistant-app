@@ -35,5 +35,4 @@ const BudgetTracker = sequelize.define('budgetTracker', {
   tableName: 'budgetTracker',
   timestamps: false
 });
-
 module.exports = BudgetTracker;
