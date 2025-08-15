@@ -4,7 +4,8 @@ const budgetController = require('../controllers/budgetTracker.controller');
 const upload = require('../middleware/upload');
 
 // Add Expense (POST /api/budget)
-router.post('/', budgetController.addExpense);
+// The multer middleware `upload.single('receipt')` is added to handle file uploads
+router.post('/', upload.single('receipt'), budgetController.addExpense);
 
 // Get All Expenses (GET /api/budget)
 router.get('/', budgetController.getAllExpenses);
@@ -27,4 +28,3 @@ router.get('/total', budgetController.getTotalAmount);
 router.get('/total-by-category', budgetController.getTotalByCategory);
 
 module.exports = router;
-

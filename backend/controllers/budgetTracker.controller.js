@@ -1,10 +1,12 @@
 const Budget = require("../models/budgetTracker.model");
 const { Op } = require("sequelize");
+const moment = require('moment');
 
 // ✅ Add Expense
 exports.addExpense = async (req, res) => {
   try {
     const { title, description, category, amount, date } = req.body;
+    const receipt_url = req.file ? req.file.path : null;
 
     if (!title || !category || !amount || !date) {
       return res.status(400).json({
@@ -18,7 +20,8 @@ exports.addExpense = async (req, res) => {
       description,
       category,
       amount,
-      date
+      date,
+      receipt_url
     });
 
     res.status(201).json({
@@ -147,39 +150,92 @@ exports.deleteExpense = async (req, res) => {
   }
 };
 
-// 📌 Placeholder Controllers for unimplemented routes
-exports.getTodayExpenses = (req, res) => {
-  res.json({ success: true, message: "getTodayExpenses not implemented yet" });
+// ✅ Get Today's Expenses
+exports.getTodayExpenses = async (req, res) => {
+  try {
+    const startOfDay = moment().startOf('day').toDate();
+    const endOfDay = moment().endOf('day').toDate();
+
+    const expenses = await Budget.findAll({
+      where: {
+        date: {
+          [Op.gte]: startOfDay,
+          [Op.lte]: endOfDay,
+        }
+      },
+      order: [["date", "DESC"]]
+    });
+    res.json({ success: true, data: expenses, count: expenses.length });
+  } catch (error) {
+    console.error("Error fetching today's expenses:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch today's expenses", error: error.message });
+  }
 };
 
-exports.getWeeklyExpenses = (req, res) => {
-  res.json({ success: true, message: "getWeeklyExpenses not implemented yet" });
+// ✅ Get Weekly Expenses
+exports.getWeeklyExpenses = async (req, res) => {
+  try {
+    const startOfWeek = moment().startOf('week').toDate();
+    const endOfWeek = moment().endOf('week').toDate();
+
+    const expenses = await Budget.findAll({
+      where: {
+        date: {
+          [Op.gte]: startOfWeek,
+          [Op.lte]: endOfWeek,
+        }
+      },
+      order: [["date", "DESC"]]
+    });
+    res.json({ success: true, data: expenses, count: expenses.length });
+  } catch (error) {
+    console.error("Error fetching weekly expenses:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch weekly expenses", error: error.message });
+  }
 };
 
-exports.getMonthlyExpenses = (req, res) => {
-  res.json({ success: true, message: "getMonthlyExpenses not implemented yet" });
+// ✅ Get Monthly Expenses
+exports.getMonthlyExpenses = async (req, res) => {
+  try {
+    const startOfMonth = moment().startOf('month').toDate();
+    const endOfMonth = moment().endOf('month').toDate();
+
+    const expenses = await Budget.findAll({
+      where: {
+        date: {
+          [Op.gte]: startOfMonth,
+          [Op.lte]: endOfMonth,
+        }
+      },
+      order: [["date", "DESC"]]
+    });
+    res.json({ success: true, data: expenses, count: expenses.length });
+  } catch (error) {
+    console.error("Error fetching monthly expenses:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch monthly expenses", error: error.message });
+  }
 };
 
 exports.getExpensesByDate = (req, res) => {
-  res.json({ success: true, message: "getExpensesByDate not implemented yet" });
+  res.json({ success: true, message: "getExpensesByDate not implemented yet" });
 };
 
 exports.getExpensesByWeek = (req, res) => {
-  res.json({ success: true, message: "getExpensesByWeek not implemented yet" });
+  res.json({ success: true, message: "getExpensesByWeek not implemented yet" });
 };
 
 exports.getExpensesByMonth = (req, res) => {
-  res.json({ success: true, message: "getExpensesByMonth not implemented yet" });
+  res.json({ success: true, message: "getExpensesByMonth not implemented yet" });
 };
 
 exports.getExpensesByCategory = (req, res) => {
-  res.json({ success: true, message: "getExpensesByCategory not implemented yet" });
+  res.json({ success: true, message: "getExpensesByCategory not implemented yet" });
 };
 
 exports.getTotalAmount = (req, res) => {
-  res.json({ success: true, message: "getTotalAmount not implemented yet" });
+  res.json({ success: true, message: "getTotalAmount not implemented yet" });
 };
 
 exports.getTotalByCategory = (req, res) => {
-  res.json({ success: true, message: "getTotalByCategory not implemented yet" });
+  res.json({ success: true, message: "getTotalByCategory not implemented yet" });
 };
