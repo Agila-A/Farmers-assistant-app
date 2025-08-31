@@ -3,15 +3,19 @@
 
 .agrilend-header {
   display: flex;
+  justify-content: space-between; 
   align-items: center;
-  padding: 1rem 0;
+  padding: 15px 25px;
+  background-color: #d6f5d6; 
   border-bottom: 2px solid #e0e0e0;
-  background-color: #d6f5d6;
 }
 
 .agrilend-header .logo {
   display: flex;
   align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2e7d32;
 }
 
 .agrilend-header .logo-icon {
@@ -48,13 +52,12 @@
 
 /* Banner */
 .agrilend-banner {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #edfcea;
-  border-radius: 8px;
-  padding: 10px 20px;
-  margin-bottom: 20px;
   
 }
 
@@ -75,18 +78,23 @@
 }
 
 .notify-icon {
+  position: relative;
+  font-size: 26px;
+  cursor: pointer;
   color: rgb(55, 155, 55);
-  font-size: 20px;
+}
+.notify-icon .badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
 }
 
-/* Search Bar */
-.search-bar {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
 
 /* Equipment List */
 .equipment-list {

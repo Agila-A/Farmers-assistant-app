@@ -10,8 +10,6 @@ import { auth } from '../firebase';
 import { agrilendEquipmentAPI } from '../utils/api';
 import "../styles/AgriLendPage.css";
 
-// This is where you would get your image paths from the backend or a CDN
-// For this example, we'll keep the local images as a fallback/initial data source
 import tractorImage from '../assets/tractor.png';
 
 const AgriLendPage = () => {
@@ -21,10 +19,9 @@ const AgriLendPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   const [triggeredByNotification, setTriggeredByNotification] = useState(false);
-  const [listedEquipment, setListedEquipment] = useState([]); // Initialized as an empty array
+  const [listedEquipment, setListedEquipment] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // API-related state
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   
@@ -32,23 +29,19 @@ const AgriLendPage = () => {
     { id: 1, equipmentName: "Tractor with tipper", approved: true }
   ];
 
-  // Function to fetch equipment data from the API
   const fetchEquipment = async () => {
     setIsLoading(true);
     setError(null);
     try {
       const data = await agrilendEquipmentAPI.getAll();
-      
-      // Map the data to match your component structure if necessary
       const formattedEquipment = data.data.map(item => ({
         ...item,
         price: `₹ ${item.price}`,
         owner: item.ownerName,
-        image: item.imageUrl || tractorImage, // Use API image or a local fallback
+        image: item.imageUrl || tractorImage,
         delivery: item.deliveryAvailable,
         isOnSale: item.isOnSale || false
       }));
-
       setListedEquipment(formattedEquipment);
     } catch (err) {
       console.error('Failed to fetch equipment:', err);
@@ -58,11 +51,9 @@ const AgriLendPage = () => {
     }
   };
 
-  // Fetch data when the component mounts
   useEffect(() => {
     fetchEquipment();
   }, []);
-
 
   const handleRequest = () => {
     setShowConfirmation(true);
@@ -90,8 +81,7 @@ const AgriLendPage = () => {
     }
   };
 
-  const handleAddEquipment = (newEquipment) => {
-    // When a new item is successfully added, we re-fetch all the data
+  const handleAddEquipment = () => {
     fetchEquipment();
     setShowForm(false);
   };
@@ -99,7 +89,6 @@ const AgriLendPage = () => {
   const handleDeleteEquipment = async (equipmentId) => {
     try {
       await agrilendEquipmentAPI.delete(equipmentId);
-      // Re-fetch equipment after deletion
       fetchEquipment();
     } catch (err) {
       console.error('Failed to delete equipment:', err);
@@ -113,16 +102,33 @@ const AgriLendPage = () => {
   );
 
   return (
-    <div className="agrilend-container">
-      <header className="agrilend-header">
-        <div className="logo">
-          <div className="logo-icon">
-            <span role="img" aria-label="leaf">🌿</span>
-          </div>
-          <h1>AGRILEND</h1>
-        </div>
-      </header>
+    <div className="agrilend-page">
+      {/* ✅ Fixed Top Header */}
+<header className="agrilend-header">
+  <div className="logo">
+    <div className="logo-icon">
+      <span role="img" aria-label="leaf">🌿</span>
+    </div>
+    <h1>AGRILEND</h1>
+  </div>
 
+  <span
+    className="notify-icon"
+    onClick={() => {
+      if (approvedNotifications.length > 0) {
+        setTriggeredByNotification(true);
+        setShowPayment(true);
+      }
+    }}
+  >
+    🔔
+    {approvedNotifications.length > 0 && (
+      <span className="badge">{approvedNotifications.length}</span>
+    )}
+  </span>
+</header>
+
+      {/* ✅ Push content below header */}
       <main className="agrilend-main">
         <AnimatePresence mode="wait">
           {showPayment ? (
@@ -182,29 +188,6 @@ const AgriLendPage = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="agrilend-banner">
-                <p>➡️ Click here to rent your farm items and equipment</p>
-                <div className="agrilend-icons">
-                  <button onClick={() => setShowForm(true)}>
-                    <span className="rent-icon">RENT</span>
-                  </button>
-                  <span
-                    className="notify-icon"
-                    onClick={() => {
-                      if (approvedNotifications.length > 0) {
-                        setTriggeredByNotification(true);
-                        setShowPayment(true);
-                      }
-                    }}
-                  >
-                    🔔
-                    {approvedNotifications.length > 0 && (
-                      <span className="badge">{approvedNotifications.length}</span>
-                    )}
-                  </span>
-                </div>
-              </div>
-
               <input
                 type="text"
                 className="search-bar"
