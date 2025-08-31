@@ -4,6 +4,11 @@ import { signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from "../firebase";
 import { doc, getDoc } from 'firebase/firestore';
+import { 
+  FaHome, FaTractor, FaMoneyBillWave, FaComments, 
+  FaCalendarAlt, FaUsers, FaUser, FaCog, FaSignOutAlt,
+  FaHandHolding, FaHandshake, FaCreditCard, FaSeedling
+} from "react-icons/fa";
 import "../Styles/Sidebar.css";
 
 const Sidebar = () => {
@@ -35,21 +40,58 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <h3>Farmer’s Assistant</h3>
+      {/* ✅ Unique gradient container for project title */}
+      <div className="sidebar-title">
+        <FaSeedling className="title-icon" />
+        <span>Farmer’s Assistant</span>
+      </div>
 
       <ul>
-        <li onClick={() => navigate('/dashboard')}><span>🏠</span> Home</li>
-        <li onClick={() => navigate('/agrilend')}><span>🚜</span> AgriLend</li>
-        <li onClick={() => navigate('/budget')}><span>💰</span> Budget Tracker</li>
-        <li onClick={() => navigate('/chat')}><span>💬</span> Let’s Chat</li>
-        <li onClick={() => navigate('/schedule')}><span>📅</span> Schedules</li>
-        <li onClick={() => navigate('/community')}><span>🌾</span> Community</li>
+        <li onClick={() => navigate('/dashboard')}>
+          <FaHome /> Home
+        </li>
+        
+        <li>
+          <div onClick={() => navigate('/agrilend')}>
+            <FaTractor /> AgriLend
+          </div>
+          <ul className="submenu">
+            <li onClick={() => navigate('/agrilend-form')}>
+              <FaHandHolding /> Rent
+            </li>
+            <li onClick={() => navigate('/requests')}>
+              <FaHandshake /> Request
+            </li>
+            <li onClick={() => navigate('/payment')}>
+              <FaCreditCard /> Payment
+            </li>
+          </ul>
+        </li>
+
+        <li onClick={() => navigate('/budget')}>
+          <FaMoneyBillWave /> Budget Tracker
+        </li>
+        <li onClick={() => navigate('/chat')}>
+          <FaComments /> Let’s Chat
+        </li>
+        <li onClick={() => navigate('/schedule')}>
+          <FaCalendarAlt /> Schedules
+        </li>
+        <li onClick={() => navigate('/community')}>
+          <FaUsers /> Community
+        </li>
       </ul>
 
       <div className="sidebar-footer">
-        <li onClick={() => navigate('/profile')}><span>🌾</span> Profile</li>
-        <li onClick={() => navigate('/settings')}><span>⚙️</span> Settings</li>
-        <li onClick={handleLogout}><span>🚪</span> Logout</li>
+        <li onClick={() => navigate('/profile')}>
+          <FaUser /> Profile
+        </li>
+        <li onClick={() => navigate('/settings')}>
+          <FaCog /> Settings
+        </li>
+        <li onClick={handleLogout}>
+          <FaSignOutAlt /> Logout
+        </li>
       </div>
 
       {user && (
