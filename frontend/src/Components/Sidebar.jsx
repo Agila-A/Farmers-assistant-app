@@ -89,9 +89,9 @@ const Sidebar = () => {
         <li onClick={() => navigate('/settings')}>
           <FaCog /> Settings
         </li>
-        <li onClick={handleLogout}>
-          <FaSignOutAlt /> Logout
-        </li>
+       <li onClick={handleLogout}>
+        <FaSignOutAlt style={{ color: "#bd4a27ff" }} /> Logout
+      </li>
       </div>
 
       {user && (
